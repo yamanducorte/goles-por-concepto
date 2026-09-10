@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C1A0E">
+<title>Goles × Concepto · Formativas 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --campo:#0C1A0E; --panel:#122513; --panel2:#173017; --panel3:#1D3A1D;
+  --cal:rgba(217,178,60,.16); --cal-fuerte:rgba(217,178,60,.34);
+  --tiza:#F5F1E3; --tiza2:#A8B59B; --tiza3:#6E7C63;
+  --afavor:#3DC24E; --afavor-dim:#1B4A20; --afavor-txt:#82E28D;
+  --encontra:#E8402F; --encontra-dim:#571E17; --encontra-txt:#FF9184;
+  --amarillo:#D9B23C; --oro:#D9B23C;
+  --cond:'Barlow Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+  --body:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--campo);color:var(--tiza);font-family:var(--body);font-size:15px;line-height:1.45;
+  background-image:radial-gradient(1200px 500px at 50% -180px,rgba(217,178,60,.055),transparent 70%)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+input,select,textarea{font:inherit;color:var(--tiza);background:var(--campo);border:1px solid var(--cal-fuerte);border-radius:8px;padding:9px 10px;width:100%}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--tiza);outline-offset:2px}
+::placeholder{color:var(--tiza3)}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 14px}
+
+
+/* ---------- marca institucional ---------- */
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.escudo{height:46px;width:auto;flex-shrink:0;filter:drop-shadow(0 2px 5px rgba(0,0,0,.45))}
+@media(max-width:719px){.escudo{height:36px}}
+.slogan{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--oro);margin-top:1px}
+
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:40;background:rgba(12,26,14,.93);backdrop-filter:blur(6px);border-bottom:1px solid var(--cal)}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0 6px}
+.kicker{font-family:var(--cond);font-weight:600;font-size:9.5px;letter-spacing:.16em;color:var(--tiza2);text-transform:uppercase}
+h1{font-family:var(--cond);font-weight:700;font-size:clamp(17px,4vw,24px);letter-spacing:.02em;line-height:1;text-transform:uppercase}
+h1 .x{color:var(--oro)}
+.sub{font-size:10px;color:var(--tiza2);margin-top:1px}
+.top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn{font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--cal-fuerte);border-radius:999px;padding:8px 16px;background:var(--panel);white-space:nowrap}
+.btn:hover{background:var(--panel2)}
+.btn.primary{background:var(--oro);color:#241a03;border-color:var(--oro)}
+.btn.primary:hover{background:#E9C554}
+.btn.danger{color:var(--encontra-txt);border-color:rgba(255,109,90,.4)}
+#btnNuevoTop{display:none}
+@media(min-width:720px){#btnNuevoTop{display:inline-block}}
+
+.menu{position:relative}
+.menu summary{list-style:none;font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--cal-fuerte);border-radius:999px;padding:6px 12px;background:var(--panel);cursor:pointer;user-select:none}
+.menu summary::-webkit-details-marker{display:none}
+.menu[open] summary{background:var(--panel2)}
+.menu-pop{position:absolute;right:0;top:calc(100% + 6px);background:var(--panel2);border:1px solid var(--cal-fuerte);border-radius:12px;
+  min-width:220px;padding:6px;z-index:50;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+.menu-pop button{display:block;width:100%;text-align:left;padding:9px 10px;border-radius:8px;font-size:14px}
+.menu-pop button:hover{background:var(--panel3)}
+.menu-note{font-size:11px;color:var(--tiza3);padding:6px 10px 4px;border-top:1px solid var(--cal);margin-top:4px}
+
+/* ---------- tabs ---------- */
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:6px 0 8px;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab{font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  padding:6px 12px;border-radius:999px;border:1px solid var(--cal);color:var(--tiza2);flex-shrink:0}
+.tab:hover{color:var(--tiza);border-color:var(--cal-fuerte)}
+.tab.on{background:var(--oro);color:#241a03;border-color:var(--oro)}
+
+/* ---------- secciones ---------- */
+main{padding:18px 0 96px}
+section{margin-bottom:26px}
+.sec-t{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.sec-t h2{font-family:var(--cond);font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--tiza2);white-space:nowrap}
+.sec-t .rule{flex:1;height:1px;background:var(--cal)}
+.hint{font-size:12px;color:var(--tiza3);margin-top:8px}
+
+.sec-toggle{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin-bottom:0;padding-bottom:12px}
+.sec-toggle h2{font-family:var(--cond);font-weight:600;font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--tiza2);white-space:nowrap}
+.sec-toggle .rule{flex:1;height:1px;background:var(--cal)}
+.sec-chev{color:var(--tiza3);font-size:13px;transition:transform .2s ease;flex-shrink:0}
+.sec-wrap.open .sec-chev{transform:rotate(180deg)}
+.sec-collapse{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.sec-wrap.open .sec-collapse{grid-template-rows:1fr}
+.sec-collapse-in{overflow:hidden;padding-top:2px}
+
+.subacc{background:var(--panel);border:1px solid var(--cal);border-radius:12px;padding:4px 10px;margin-top:8px}
+.subacc:first-of-type{margin-top:0}
+.sec-toggle.sub{padding:9px 0}
+.sec-toggle.sub h2{font-size:13px;letter-spacing:.09em;color:var(--tiza)}
+.tag-count{font-family:var(--cond);font-weight:700;font-size:11px;color:var(--tiza3);background:var(--campo);
+  border-radius:999px;padding:2px 8px;flex-shrink:0}
+.subacc .sec-collapse-in{padding-bottom:10px}
+
+/* ---------- chips ---------- */
+.chipsbar{display:flex;align-items:center;gap:6px}
+.chips{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chipsnav{flex-shrink:0;width:30px;height:30px;border-radius:50%;border:1px solid var(--cal-fuerte);background:var(--panel);
+  color:var(--tiza2);font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center}
+.chipsnav:hover{background:var(--panel3);color:var(--tiza)}
+.chip{font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;
+  padding:6px 12px;border-radius:999px;border:1px solid var(--cal);color:var(--tiza2);flex-shrink:0;white-space:nowrap}
+.chip:hover{border-color:var(--cal-fuerte);color:var(--tiza)}
+.chip.on{background:var(--oro);color:#241a03;border-color:var(--oro)}
+.chip .n{opacity:.65;font-weight:500;margin-left:4px}
+.seg{display:inline-flex;border:1px solid var(--cal-fuerte);border-radius:999px;overflow:hidden}
+.seg button{font-family:var(--cond);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;padding:7px 14px;color:var(--tiza2)}
+.seg button.on{background:var(--oro);color:#241a03}
+.seg button.on.segM{background:var(--afavor);color:#08130c}
+.seg button.on.segR{background:var(--encontra);color:#fff}
+
+/* ---------- marcador (hero) ---------- */
+.score{position:relative;background:var(--panel);border:1px solid var(--cal);border-radius:14px;padding:12px 12px 10px;overflow:hidden}
+.score svg.mediacancha{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+.score-grid{position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px}
+.score-side{text-align:center}
+.score-num{font-family:var(--cond);font-weight:700;font-size:clamp(32px,9vw,48px);line-height:.9;font-variant-numeric:tabular-nums}
+.score-side.m .score-num{color:var(--afavor)}
+.score-side.r .score-num{color:var(--encontra)}
+.score-lbl{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tiza2);margin-top:3px}
+.score-dif{text-align:center}
+.dif-chip{display:inline-block;font-family:var(--cond);font-weight:700;font-size:14px;border:1px solid var(--cal-fuerte);border-radius:999px;padding:4px 10px;background:var(--campo)}
+.dif-chip.pos{color:var(--afavor-txt)} .dif-chip.neg{color:var(--encontra-txt)} .dif-chip.cero{color:var(--tiza2)}
+.dif-lbl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--tiza3);margin-top:3px}
+
+/* ---------- gráfico de conceptos (columna única, deslizable) ---------- */
+.mnav{display:flex;gap:5px;margin-bottom:6px}
+.mnavbtn{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;border:1px solid var(--cal);color:var(--tiza2);flex:1}
+.mnavbtn.on{background:var(--panel3);border-color:var(--cal-fuerte);color:var(--tiza)}
+.mswipe{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  border:1px solid var(--cal);border-radius:13px;background:var(--panel)}
+.mswipe::-webkit-scrollbar{display:none}
+.mslide{flex:0 0 100%;scroll-snap-align:start;min-width:100%;padding:3px}
+.mcol{display:flex;flex-direction:column}
+.mcol-row{display:grid;grid-template-columns:1fr minmax(56px,96px) 20px;align-items:center;gap:6px;
+  padding:4px 7px;border-radius:8px;text-align:left;width:100%}
+button.mcol-row:hover{background:var(--panel3)}
+.mcol-label{font-size:12px;color:var(--tiza2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mcol-row.M .mcol-label, .mcol-row.R .mcol-label{color:var(--tiza)}
+.mcol-barwrap{height:6px;border-radius:999px;background:var(--campo);overflow:hidden}
+.mcol-bar{display:block;height:100%;border-radius:999px}
+.mcol-bar.M{background:var(--afavor)}
+.mcol-bar.R{background:var(--encontra)}
+.mcol-n{font-family:var(--cond);font-weight:700;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--tiza2)}
+.mempty{padding:12px;color:var(--tiza3);text-align:center;font-size:12px}
+
+/* ---------- categoría ---------- */
+.cat-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:10px}
+.cat-head h2{font-family:var(--cond);font-weight:700;font-size:24px;letter-spacing:.03em;text-transform:uppercase}
+.filters{display:flex;flex-direction:column;gap:9px;margin:14px 0}
+
+/* ---------- lista de goles ---------- */
+.g-tags{display:flex;flex-wrap:wrap;gap:4px}
+.tagchip{font-size:11px;letter-spacing:.02em;border:1px solid var(--cal);border-radius:999px;padding:2px 8px;color:var(--tiza2);background:var(--campo);cursor:pointer}
+button.tagchip:hover{border-color:var(--oro);color:var(--tiza)}
+.tagchip.on{background:var(--oro);border-color:var(--oro);color:#241a03}
+.tagchip.none{border-style:dashed;color:var(--amarillo);border-color:rgba(217,178,60,.5);cursor:default}
+
+/* ---------- tarjetas de partido ---------- */
+.matchlist{display:flex;flex-direction:column;gap:8px}
+.mcard{background:var(--panel);border:1px solid var(--cal);border-radius:14px;overflow:hidden}
+.mc-head{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;text-align:left}
+.mc-head:hover{background:var(--panel3)}
+.mc-rival{font-weight:600;font-size:14.5px;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc-rival .vs{color:var(--tiza3);font-weight:500;font-size:12.5px}
+.mc-fecha{font-size:12px;color:var(--tiza2);white-space:nowrap;flex-shrink:0}
+.mc-score{font-family:var(--cond);font-weight:700;font-size:19px;white-space:nowrap;display:flex;align-items:baseline;gap:3px;flex-shrink:0}
+.mc-score .sm{color:var(--afavor-txt)} .mc-score .sr{color:var(--encontra-txt)} .mc-score .unk{color:var(--tiza3)}
+.mc-score .sep{color:var(--tiza3);font-weight:500;font-size:14px}
+.mc-chev{color:var(--tiza3);transition:transform .2s ease;flex-shrink:0;font-size:12px}
+.mcard.open .mc-chev{transform:rotate(180deg)}
+.mc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.mcard.open .mc-body{grid-template-rows:1fr}
+.mc-body-in{overflow:hidden;border-top:1px solid var(--cal)}
+.gl-row{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--cal)}
+.gl-row:last-child{border-bottom:0}
+.gl-row.hl{background:rgba(217,178,60,.12)}
+.gl-badge{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.05em;border-radius:999px;padding:2px 8px;flex-shrink:0}
+.gl-badge.M{background:rgba(61,194,78,.16);color:var(--afavor-txt)}
+.gl-badge.R{background:rgba(232,64,47,.16);color:var(--encontra-txt)}
+.gl-num{font-family:var(--cond);font-weight:700;color:var(--tiza2);font-size:13px;flex-shrink:0;width:22px;text-align:center}
+.gl-tags{display:flex;flex-wrap:wrap;gap:4px;flex:1;min-width:0}
+.gl-acts{display:flex;gap:6px;flex-shrink:0}
+.gl-note{padding:8px 12px;font-size:12.5px;color:var(--tiza2);border-bottom:1px solid var(--cal);display:flex;justify-content:space-between;gap:8px;align-items:center}
+.gl-note:last-child{border-bottom:0}
+.gacts{display:flex;gap:6px;flex-shrink:0}
+.iconb{width:34px;height:34px;border:1px solid var(--cal-fuerte);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--campo);text-decoration:none}
+.iconb:hover{background:var(--panel3)}
+.iconb.play{color:var(--tiza)}
+tr.sin td{opacity:.85}
+.singol{display:inline-block;font-size:11.5px;letter-spacing:.02em;border:1px dashed;border-radius:999px;padding:2px 10px}
+.singol.M{color:var(--tiza2);border-color:var(--cal-fuerte)}
+.singol.R{color:var(--afavor-txt);border-color:rgba(61,194,78,.55)}
+.empty{background:var(--panel);border:1px dashed var(--cal-fuerte);border-radius:12px;padding:22px;text-align:center;color:var(--tiza2)}
+.empty button{margin-top:8px}
+
+/* ---------- FAB ---------- */
+.fab{position:fixed;right:16px;bottom:16px;z-index:45;width:56px;height:56px;border-radius:50%;background:var(--tiza);color:#10160f;
+  font-size:30px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.fab:hover{background:#fff}
+@media(min-width:720px){.fab{display:none}}
+
+/* ---------- modal ---------- */
+.overlay{position:fixed;inset:0;background:rgba(5,9,7,.7);z-index:60;display:none;align-items:flex-end;justify-content:center}
+.overlay.open{display:flex}
+@media(min-width:640px){.overlay.open{align-items:center}}
+.modal{background:var(--panel2);border:1px solid var(--cal-fuerte);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;
+  border-radius:18px 18px 0 0;padding:18px 16px 22px}
+@media(min-width:640px){.modal{border-radius:18px}}
+.modal h3{font-family:var(--cond);font-weight:700;font-size:22px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.f-full{grid-column:1/-1}
+label.flabel{display:block;font-family:var(--cond);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tiza2);margin-bottom:5px}
+.tipo-seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tipo-seg button{font-family:var(--cond);font-weight:700;font-size:16px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--cal-fuerte);border-radius:10px;padding:11px;color:var(--tiza2)}
+.tipo-seg button.onM{background:var(--afavor);border-color:var(--afavor);color:#08130c}
+.tipo-seg button.onR{background:var(--encontra);border-color:var(--encontra);color:#1c0a07}
+.tagcloud{display:flex;flex-direction:column;gap:6px}
+.tagcloud .chip{font-size:13px;text-transform:none;letter-spacing:.02em;font-family:var(--body);font-weight:500}
+.tc-h{font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tiza3);margin-top:4px}
+.tc-h.sub{font-size:9.5px;color:var(--tiza3);margin-top:8px;margin-left:4px;letter-spacing:.1em;opacity:.85}
+.tc-h:first-child{margin-top:0}
+.tc-row{display:flex;flex-wrap:wrap;gap:6px}
+.tc-empty{font-size:12.5px;color:var(--tiza3);font-style:italic;padding:2px 0}
+.chipwrap{display:inline-flex;align-items:stretch}
+.chipwrap .chip{border-radius:999px 0 0 999px}
+.chipdel{border:1px solid var(--cal);border-left:none;border-radius:0 999px 999px 0;background:var(--campo);color:var(--tiza3);
+  width:22px;font-size:14px;line-height:1;flex-shrink:0}
+.chipdel:hover{background:var(--encontra-dim);color:var(--encontra-txt);border-color:var(--encontra)}
+.newtag{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+.newtag input{flex:1;min-width:140px}
+.newtag select{flex-shrink:0}
+.ferr{color:var(--encontra-txt);font-size:12.5px;min-height:16px;margin-top:8px}
+.modal-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px}
+.modal-foot .right{display:flex;gap:8px;margin-left:auto}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(8px);z-index:70;background:var(--tiza);color:#10160f;
+  font-family:var(--cond);font-weight:600;letter-spacing:.05em;font-size:15px;padding:9px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3);font-size:12px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ================= informe PDF ================= */
+#printRoot{display:none}
+@media print{
+  header.top, .fab, #toast, main, footer.pie, .overlay{display:none!important}
+  #printRoot{display:block!important}
+  html,body{background:#fff!important}
+  @page{ size:A4; margin:15mm 14mm 17mm; }
+}
+.preport{font-family:var(--body);color:#1B1F1A;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.ppage{page-break-after:always;padding-bottom:6mm}
+.ppage:last-child{page-break-after:auto}
+.phead{display:flex;align-items:center;gap:12px;border-bottom:2px solid #C9A227;padding-bottom:8px;margin-bottom:14px}
+.phead img{height:44px;width:auto;flex-shrink:0}
+.phead .pk{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5C6A56}
+.phead .ps{font-family:var(--cond);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#C9A227;margin-top:2px}
+.phead .pright{margin-left:auto;text-align:right;font-size:10.5px;color:#6b7268}
+.ptitle{font-family:var(--cond);font-weight:700;font-size:34px;letter-spacing:.02em;text-transform:uppercase;color:#0F3D1D;margin:2px 0 0}
+.psub{font-size:11.5px;color:#6b7268;margin-bottom:14px}
+.pscore{display:flex;align-items:center;justify-content:center;gap:26px;background:#F4F6F1;border:1px solid #E2E6DF;border-radius:12px;padding:14px 10px;margin-bottom:10px}
+.pscore .side{text-align:center;min-width:80px}
+.pscore .num{font-family:var(--cond);font-weight:700;font-size:38px;line-height:1}
+.pscore .m .num{color:#146C34} .pscore .r .num{color:#B23122}
+.pscore .lbl{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6b7268;margin-top:3px}
+.pscore .dif{text-align:center}
+.pscore .dif .chip{display:inline-block;font-family:var(--cond);font-weight:700;font-size:17px;border-radius:999px;padding:4px 14px;background:#fff;border:1px solid #E2E6DF;color:#1B1F1A}
+.pcompare{text-align:center;font-size:11px;color:#5C6A56;margin-bottom:18px}
+.pcompare b{color:#1B1F1A}
+.psectitle{font-family:var(--cond);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#0F3D1D;
+  border-bottom:1px solid #E2E6DF;padding-bottom:5px;margin:16px 0 8px}
+.pmirror{display:flex;flex-direction:column;gap:0}
+.prow{display:grid;grid-template-columns:1fr 150px 1fr;align-items:center;column-gap:10px;padding:3.5px 0;border-bottom:1px solid #EEF1EC}
+.prow:last-child{border-bottom:0}
+.pside{display:flex;align-items:center;height:11px;gap:5px}
+.pside.l{justify-content:flex-end}
+.pside.r{justify-content:flex-start}
+.pbar{display:block;height:6px;border-radius:3px}
+.pside.l .pbar{background:#3DAA5C}
+.pside.r .pbar{background:#D24C3B}
+.pnum{font-family:var(--cond);font-weight:700;font-size:10.5px;width:16px;text-align:center;color:#3A4038;flex-shrink:0}
+.plabel{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;color:#1B1F1A;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pempty{font-size:11px;color:#8b9285;font-style:italic;padding:6px 0 2px}
+.ptable{width:100%;border-collapse:collapse;margin-top:4px}
+.ptable th{font-family:var(--cond);font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6b7268;
+  text-align:center;padding:6px 4px;border-bottom:1.5px solid #C9A227}
+.ptable th:first-child{text-align:left}
+.ptable td{text-align:center;padding:6px 4px;font-size:12px;border-bottom:1px solid #EEF1EC;font-variant-numeric:tabular-nums}
+.ptable td:first-child{text-align:left;font-family:var(--cond);font-weight:600;letter-spacing:.03em}
+.ptable td.dpos{color:#146C34;font-weight:700} .ptable td.dneg{color:#B23122;font-weight:700}
+.pfoot{margin-top:16px;padding-top:8px;border-top:1px solid #E2E6DF;font-size:9.5px;color:#9aa192;display:flex;justify-content:space-between}
+/* ---------- pantalla de acceso ---------- */
+.lockscreen{position:fixed;inset:0;z-index:500;background:var(--campo);display:flex;align-items:center;justify-content:center;padding:20px}
+.lockscreen.hidden{display:none}
+.lockcard{width:100%;max-width:340px;background:var(--panel);border:1px solid var(--cal);border-radius:20px;padding:28px 24px 24px;text-align:center}
+.lockescudo{height:64px;width:auto;margin:0 auto 14px;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
+.lockkicker{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tiza2)}
+.lockcard h2{font-family:var(--cond);font-weight:700;font-size:24px;letter-spacing:.02em;text-transform:uppercase;margin-top:4px}
+.lockcard h2 .x{color:var(--oro)}
+.locksub{font-size:12.5px;color:var(--tiza2);margin:8px 0 16px}
+.lockcard input{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--cal-fuerte);background:var(--campo);
+  color:var(--tiza);font-size:15px;text-align:center;margin-bottom:12px}
+.lockcard input:focus{outline:2px solid var(--oro);outline-offset:1px}
+.lockcard .btn{width:100%}
+.lockerr{color:var(--encontra-txt);font-size:12.5px;min-height:16px;margin-top:10px}
+</style>
+</head>
+<body>
+
+<div class="lockscreen" id="lockscreen">
+  <form class="lockcard" id="lockform">
+    <img class="lockescudo" src="" id="lockEscudo" alt="Escudo Deportivo Maldonado">
+    <div class="lockkicker">Deportivo Maldonado · Coordinación Juvenil</div>
+    <h2>Goles <span class="x">×</span> Concepto</h2>
+    <p class="locksub">Ingresá la contraseña para entrar</p>
+    <input type="password" id="lockPass" placeholder="Contraseña" autocomplete="current-password" autofocus>
+    <button type="submit" class="btn primary">Entrar</button>
+    <div class="lockerr" id="lockErr"></div>
+  </form>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <div class="top-in">
+      <div class="brand">
+        <img class="escudo" src="data:image/png;base64,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" alt="Escudo del Club Deportivo Maldonado" width="166" height="220">
+        <div>
+          <div class="kicker">Deportivo Maldonado · Coordinación Juvenil</div>
+          <h1>Goles <span class="x">×</span> Concepto</h1>
+          <div class="sub">Temporada 2026 · Campeonato Uruguayo · Formativas S14–S19</div>
+          <div class="slogan">#FormandoEnMaldonado</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <details class="menu" id="menuDatos">
+          <summary>Datos</summary>
+          <div class="menu-pop">
+            <button data-md="pdf">Exportar informe PDF</button>
+            <button data-md="export">Exportar datos (.json)</button>
+            <button data-md="import">Importar datos…</button>
+            <button data-md="reset">Restaurar planilla original</button>
+            <div class="menu-note" id="storeNote"></div>
+          </div>
+        </details>
+        <button class="btn primary" id="btnNuevoTop">+ Cargar gol</button>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Categorías"></nav>
+  </div>
+</header>
+
+<main class="wrap"><div id="app"></div></main>
+
+<button class="fab" id="fab" aria-label="Cargar gol">+</button>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalT">
+  <div class="modal">
+    <h3 id="modalT">Cargar gol</h3>
+    <div class="fgrid">
+      <div class="f-full">
+        <label class="flabel">Tipo de gol</label>
+        <div class="tipo-seg">
+          <button type="button" id="segM">Marcado</button>
+          <button type="button" id="segR">Recibido</button>
+        </div>
+      </div>
+      <div>
+        <label class="flabel" for="fCat">Categoría</label>
+        <select id="fCat"></select>
+      </div>
+      <div>
+        <label class="flabel" for="fNum">N° de gol</label>
+        <input id="fNum" type="number" min="1" max="20" inputmode="numeric" placeholder="1">
+      </div>
+      <div>
+        <label class="flabel" for="fRival">Rival</label>
+        <input id="fRival" list="rivales" placeholder="Nacional" autocomplete="off">
+        <datalist id="rivales"></datalist>
+      </div>
+      <div>
+        <label class="flabel" for="fFecha">Fecha</label>
+        <input id="fFecha" type="date" min="2026-01-01" max="2026-12-31">
+      </div>
+      <div class="f-full">
+        <label class="flabel" for="fVideo">Link de YouTube</label>
+        <input id="fVideo" type="url" placeholder="https://www.youtube.com/watch?v=…">
+      </div>
+      <div class="f-full">
+        <label class="flabel">Conceptos y etiquetas de la jugada</label>
+        <div class="tagcloud" id="tagcloud"></div>
+        <div class="newtag">
+          <input id="fNewTag" placeholder="Nueva etiqueta (ej. Error de posicionamiento)">
+          <select id="fNewTagGrupo" title="Subcategoría de la etiqueta">
+            <option value="Grupal">Grupal</option>
+            <option value="Individual">Individual</option>
+            <option value="Colectivo">Colectivo</option>
+          </select>
+          <button type="button" class="btn" id="btnAddTag">Agregar</button>
+        </div>
+      </div>
+      <div class="f-full">
+        <label class="flabel" for="fNota">Nota</label>
+        <textarea id="fNota" rows="2" placeholder="Detalle opcional de la jugada"></textarea>
+      </div>
+    </div>
+    <div class="ferr" id="ferr"></div>
+    <div class="modal-foot">
+      <button type="button" class="btn danger" id="btnDel" hidden>Eliminar gol</button>
+      <div class="right">
+        <button type="button" class="btn" id="btnCancel">Cancelar</button>
+        <button type="button" class="btn primary" id="btnSave">Guardar gol</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="fileImport" accept="application/json,.json" hidden>
+<div class="toast" id="toast" role="status"></div>
+
+<footer class="pie"><div class="wrap" id="pieInfo"></div></footer>
+
+<div id="printRoot"></div>
+
+<script>
+"use strict";
+/* ============ datos base ============ */
+const SEED = {"goals": [{"id": "g0001", "cat": "S19", "tipo": "M", "rival": "Juventud", "numero": 3, "fecha": "2026-02-19", "orden": 6, "video": "https://www.youtube.com/watch?v=4vVQMmG2GGk", "tags": ["Centro costado"], "nota": ""}, {"id": "g0002", "cat": "S19", "tipo": "M", "rival": "Juventud", "numero": 1, "fecha": "2026-02-19", "orden": 6, "video": "https://www.youtube.com/watch?v=ZBTl48bJqIM", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0003", "cat": "S19", "tipo": "M", "rival": "Juventud", "numero": 2, "fecha": "2026-02-19", "orden": 6, "video": "https://www.youtube.com/watch?v=w8_9en54cUQ", "tags": ["Pressing alto y transición inmediata"], "nota": ""}, {"id": "g0004", "cat": "S19", "tipo": "M", "rival": "Rentista", "numero": 1, "fecha": "2026-03-20", "orden": 7, "video": "https://www.youtube.com/watch?v=Abg6nvB5E7Y", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0005", "cat": "S19", "tipo": "M", "rival": "Racing", "numero": 1, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=xjB_awavy4g", "tags": ["Centro costado"], "nota": ""}, {"id": "g0006", "cat": "S19", "tipo": "M", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 9, "video": "https://www.youtube.com/watch?v=7gQsb6P3isE", "tags": ["Centro costado"], "nota": ""}, {"id": "g0007", "cat": "S19", "tipo": "M", "rival": "Paysandú", "numero": 2, "fecha": "2026-04-18", "orden": 9, "video": "https://www.youtube.com/watch?v=50mP_18QrP8", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0008", "cat": "S19", "tipo": "M", "rival": "Liverpool", "numero": 1, "fecha": "2026-04-25", "orden": 10, "video": "https://www.youtube.com/watch?v=A7x6188bzT8", "tags": ["Centro costado"], "nota": ""}, {"id": "g0009", "cat": "S19", "tipo": "M", "rival": "Bella Vista", "numero": 1, "fecha": "2026-05-16", "orden": 11, "video": "https://www.youtube.com/watch?v=dQWrtM0yMuU", "tags": ["Centro costado"], "nota": ""}, {"id": "g0010", "cat": "S19", "tipo": "M", "rival": "Defensor", "numero": 1, "fecha": null, "orden": 12, "video": "https://www.youtube.com/watch?v=f1tLo5NM1O8", "tags": ["Pressing alto y transición inmediata"], "nota": ""}, {"id": "g0011", "cat": "S19", "tipo": "M", "rival": "Torque", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=CtrWvR_vvDo", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0012", "cat": "S19", "tipo": "M", "rival": "Danubio", "numero": 1, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=K-0V0CSxrPc", "tags": ["Centro costado"], "nota": ""}, {"id": "g0013", "cat": "S19", "tipo": "M", "rival": "Danubio", "numero": 2, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=a5rqz3Mo3CQ", "tags": ["Penal"], "nota": ""}, {"id": "g0014", "cat": "S19", "tipo": "R", "rival": "Juventud", "numero": 1, "fecha": "2026-02-19", "orden": 5, "video": "https://www.youtube.com/watch?v=uCAhCs8qZEY", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0015", "cat": "S19", "tipo": "R", "rival": "River Plate", "numero": 1, "fecha": "2026-03-13", "orden": 6, "video": "https://www.youtube.com/watch?v=Jh0LUEYo6rA", "tags": ["Duelo perdido"], "nota": ""}, {"id": "g0016", "cat": "S19", "tipo": "R", "rival": "River Plate", "numero": 2, "fecha": "2026-03-13", "orden": 6, "video": "https://www.youtube.com/watch?v=S7LMmrNZguw", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0017", "cat": "S19", "tipo": "R", "rival": "River Plate", "numero": 3, "fecha": "2026-03-13", "orden": 6, "video": "https://www.youtube.com/watch?v=ttaVL327h1I", "tags": ["Pase filtrado"], "nota": ""}, {"id": "g0018", "cat": "S19", "tipo": "R", "rival": "Racing", "numero": 6, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=qQuTGwQ_RNE", "tags": ["Centro costado"], "nota": ""}, {"id": "g0019", "cat": "S19", "tipo": "R", "rival": "Racing", "numero": 3, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=zwaWZBO9_tc", "tags": ["Gol de salida"], "nota": ""}, {"id": "g0020", "cat": "S19", "tipo": "R", "rival": "Racing", "numero": 1, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=RGuZjMUURZI", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0021", "cat": "S19", "tipo": "R", "rival": "Racing", "numero": 2, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=RGuZjMUURZI", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0022", "cat": "S19", "tipo": "R", "rival": "Racing", "numero": 4, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=REjteFyFZNI", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0023", "cat": "S19", "tipo": "R", "rival": "Racing", "numero": 5, "fecha": "2026-04-10", "orden": 8, "video": "https://www.youtube.com/watch?v=fQfi-k5nCC0", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0024", "cat": "S19", "tipo": "R", "rival": "Paysandú", "numero": 2, "fecha": "2026-04-18", "orden": 9, "video": "https://www.youtube.com/watch?v=9UTJKN5QvwQ", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0025", "cat": "S19", "tipo": "R", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 9, "video": "https://www.youtube.com/watch?v=DFHAyGtrKw8", "tags": ["Penal"], "nota": ""}, {"id": "g0026", "cat": "S19", "tipo": "R", "rival": "Bella Vista", "numero": 1, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=8XbR8K6RXyk", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0027", "cat": "S19", "tipo": "R", "rival": "Defensor", "numero": 1, "fecha": null, "orden": 12, "video": "https://www.youtube.com/watch?v=dtS4mZcPY7s", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0028", "cat": "S19", "tipo": "R", "rival": "Peñarol", "numero": 1, "fecha": "2026-05-30", "orden": 13, "video": "https://www.youtube.com/watch?v=nhO7P7ufu2A", "tags": ["Centro centro"], "nota": ""}, {"id": "g0029", "cat": "S19", "tipo": "R", "rival": "Torque", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=aVz8_KOpDOE", "tags": ["Pase filtrado"], "nota": ""}, {"id": "g0030", "cat": "S19", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=eHpNy0uhrz8", "tags": ["Centro cruzado"], "nota": ""}, {"id": "g0031", "cat": "S19", "tipo": "R", "rival": "Wanderers", "numero": 3, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=2rHvtadvAmg", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0032", "cat": "S19", "tipo": "R", "rival": "Wanderers", "numero": 2, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=oHX429VezkU", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0033", "cat": "S19", "tipo": "R", "rival": "Wanderers", "numero": 1, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=kuXZNZsTPVI", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0034", "cat": "S19", "tipo": "R", "rival": "Danubio", "numero": 1, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=bPKTNSJiiVY", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0035", "cat": "S19", "tipo": "R", "rival": "Danubio", "numero": 2, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=bPKTNSJiiVY", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0036", "cat": "S19", "tipo": "R", "rival": "Danubio", "numero": 3, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=EyM09yxvrPc", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0037", "cat": "S17", "tipo": "M", "rival": "Rentista", "numero": 1, "fecha": "2026-03-28", "orden": 6, "video": "https://www.youtube.com/watch?v=p2FeS2VQvZI", "tags": ["Penal"], "nota": ""}, {"id": "g0038", "cat": "S17", "tipo": "M", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=1M-eSL5B-iQ", "tags": ["Centro costado"], "nota": ""}, {"id": "g0039", "cat": "S17", "tipo": "M", "rival": "Paysandú", "numero": 2, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=IfxAEOoQ-lk", "tags": ["Pressing alto y transición inmediata"], "nota": ""}, {"id": "g0040", "cat": "S17", "tipo": "M", "rival": "Liverpool", "numero": 2, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=9sHmKgcaWoM", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0041", "cat": "S17", "tipo": "M", "rival": "Liverpool", "numero": 1, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=aubJ-GLIg68", "tags": ["Penal"], "nota": ""}, {"id": "g0042", "cat": "S17", "tipo": "M", "rival": "Bella Vista", "numero": 1, "fecha": "2026-05-16", "orden": 10, "video": "https://www.youtube.com/watch?v=gd_T7KfrCcI", "tags": ["Centro costado"], "nota": ""}, {"id": "g0043", "cat": "S17", "tipo": "M", "rival": "Torque", "numero": 1, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=NhSp9vN4Gcc", "tags": ["Centro centro"], "nota": ""}, {"id": "g0044", "cat": "S17", "tipo": "M", "rival": "Torque", "numero": 2, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=pa1xgI7ropA", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0045", "cat": "S17", "tipo": "R", "rival": "Paysandú", "numero": 3, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=uvIEcEy8plo", "tags": ["Centro costado"], "nota": ""}, {"id": "g0046", "cat": "S17", "tipo": "R", "rival": "Paysandú", "numero": 2, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=Qk11FuU4zTA", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0047", "cat": "S17", "tipo": "R", "rival": "Paysandú", "numero": 4, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=gQKZfBFvK6M", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0048", "cat": "S17", "tipo": "R", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=2EgIcfSuWcc", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0049", "cat": "S17", "tipo": "R", "rival": "Paysandú", "numero": 5, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=IPwACsRUIxE", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0050", "cat": "S17", "tipo": "R", "rival": "Liverpool", "numero": 1, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=pNhM7U0RKCA", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0051", "cat": "S17", "tipo": "R", "rival": "Bella Vista", "numero": 1, "fecha": "2026-05-16", "orden": 10, "video": "https://www.youtube.com/watch?v=sIYJucbYJIs", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0052", "cat": "S17", "tipo": "R", "rival": "Defensor", "numero": 1, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=ss2n1AJ0Hns", "tags": ["Centro costado"], "nota": ""}, {"id": "g0053", "cat": "S17", "tipo": "R", "rival": "Defensor", "numero": 2, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=BG9Nx8nFIQU", "tags": ["Pase filtrado"], "nota": ""}, {"id": "g0054", "cat": "S17", "tipo": "R", "rival": "Defensor", "numero": 3, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=VxgZpQpdTtk", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0055", "cat": "S17", "tipo": "R", "rival": "Peñarol", "numero": 1, "fecha": "2026-05-30", "orden": 12, "video": "https://www.youtube.com/watch?v=xZqZ-h9xZ7g", "tags": ["Centro costado"], "nota": ""}, {"id": "g0056", "cat": "S17", "tipo": "R", "rival": "Peñarol", "numero": 2, "fecha": "2026-05-30", "orden": 12, "video": "https://www.youtube.com/watch?v=xZqZ-h9xZ7g", "tags": ["Centro costado"], "nota": ""}, {"id": "g0057", "cat": "S17", "tipo": "R", "rival": "Peñarol", "numero": 3, "fecha": "2026-05-30", "orden": 12, "video": "https://www.youtube.com/watch?v=6T2mUT2cvRE", "tags": ["Pase filtrado"], "nota": ""}, {"id": "g0058", "cat": "S17", "tipo": "R", "rival": "Torque", "numero": 2, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=5iJb6nIC_Eo", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0059", "cat": "S17", "tipo": "R", "rival": "Torque", "numero": 1, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=5iJb6nIC_Eo", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0060", "cat": "S17", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=tOVNQfPIU48", "tags": ["Centro cruzado"], "nota": ""}, {"id": "g0061", "cat": "S17", "tipo": "R", "rival": "Wanderers", "numero": 1, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=UfhAuN_CX1E", "tags": ["Centro costado"], "nota": ""}, {"id": "g0062", "cat": "S17", "tipo": "R", "rival": "Wanderers", "numero": 3, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=YQRLodnZLMQ", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0063", "cat": "S17", "tipo": "R", "rival": "Wanderers", "numero": 2, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=bo0m-yCgLiw", "tags": ["Pase filtrado"], "nota": ""}, {"id": "g0064", "cat": "S16", "tipo": "M", "rival": "Nacional", "numero": 1, "fecha": "2026-02-14", "orden": 4, "video": "https://www.youtube.com/watch?v=6EYbM50Nhr0", "tags": ["Centro costado"], "nota": ""}, {"id": "g0065", "cat": "S16", "tipo": "M", "rival": "Nacional", "numero": 2, "fecha": "2026-02-14", "orden": 4, "video": "https://www.youtube.com/watch?v=pskjd6JKSHo", "tags": ["Duelo ganado"], "nota": ""}, {"id": "g0066", "cat": "S16", "tipo": "M", "rival": "Juventud", "numero": 1, "fecha": "2026-02-21", "orden": 5, "video": "https://www.youtube.com/watch?v=_4ecodYZZZw", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0067", "cat": "S16", "tipo": "M", "rival": "Rentista", "numero": 2, "fecha": "2026-03-28", "orden": 6, "video": "https://www.youtube.com/watch?v=RdNuiCE4kdQ", "tags": ["Centro costado"], "nota": ""}, {"id": "g0068", "cat": "S16", "tipo": "M", "rival": "Rentista", "numero": 1, "fecha": "2026-03-28", "orden": 6, "video": "https://www.youtube.com/watch?v=O-ADJ_0Fa20", "tags": ["Centro cruzado"], "nota": ""}, {"id": "g0069", "cat": "S16", "tipo": "M", "rival": "Rentista", "numero": 3, "fecha": "2026-03-28", "orden": 6, "video": "https://www.youtube.com/watch?v=R8-9QRDCRDo", "tags": ["Penal"], "nota": ""}, {"id": "g0070", "cat": "S16", "tipo": "M", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=eOJc4LUq894", "tags": ["Centro centro"], "nota": ""}, {"id": "g0071", "cat": "S16", "tipo": "M", "rival": "Bella Vista", "numero": 1, "fecha": "2026-05-16", "orden": 10, "video": "https://www.youtube.com/watch?v=z6AUiYCKxX4", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0072", "cat": "S16", "tipo": "M", "rival": "Torque", "numero": 2, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=UqeiL7D5tfE", "tags": ["Duelo ganado"], "nota": ""}, {"id": "g0073", "cat": "S16", "tipo": "M", "rival": "Torque", "numero": 1, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=MeLOS1OQFEE", "tags": ["Penal"], "nota": ""}, {"id": "g0074", "cat": "S16", "tipo": "M", "rival": "Nacional", "numero": 2, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=eZWEhVFfooE", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0075", "cat": "S16", "tipo": "M", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=eZWEhVFfooE", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0076", "cat": "S16", "tipo": "M", "rival": "Danubio", "numero": 1, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=VhPbaq5UGq8", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0077", "cat": "S16", "tipo": "M", "rival": "Danubio", "numero": 3, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=EAplBppZ4P4", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0078", "cat": "S16", "tipo": "M", "rival": "Danubio", "numero": 2, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=OUDZrbqkfoM", "tags": ["Penal"], "nota": ""}, {"id": "g0079", "cat": "S16", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": "2026-02-14", "orden": 4, "video": "https://www.youtube.com/watch?v=4nI9m4v83dA", "tags": ["Centro costado"], "nota": ""}, {"id": "g0080", "cat": "S16", "tipo": "R", "rival": "Nacional", "numero": 2, "fecha": "2026-02-14", "orden": 4, "video": "https://www.youtube.com/watch?v=4nI9m4v83dA", "tags": ["Centro costado"], "nota": ""}, {"id": "g0081", "cat": "S16", "tipo": "R", "rival": "Juventud", "numero": 1, "fecha": "2026-02-21", "orden": 5, "video": "https://www.youtube.com/watch?v=SlqpG3Em298", "tags": ["Centro costado"], "nota": ""}, {"id": "g0082", "cat": "S16", "tipo": "R", "rival": "Juventud", "numero": 2, "fecha": "2026-02-21", "orden": 5, "video": "https://www.youtube.com/watch?v=PAamtb0dTAg", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0083", "cat": "S16", "tipo": "R", "rival": "Rentista", "numero": 2, "fecha": "2026-03-28", "orden": 6, "video": "https://www.youtube.com/watch?v=c3Pq5wIIO6c", "tags": ["Centro centro"], "nota": ""}, {"id": "g0084", "cat": "S16", "tipo": "R", "rival": "Rentista", "numero": 1, "fecha": "2026-03-28", "orden": 6, "video": "http://youtube.com/watch?v=3kYk0EsVhHo", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0085", "cat": "S16", "tipo": "R", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 9, "video": "https://www.youtube.com/watch?v=ZJvdjJGFN5M", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0086", "cat": "S16", "tipo": "R", "rival": "Liverpool", "numero": 2, "fecha": null, "orden": 10, "video": "https://www.youtube.com/watch?v=Jmv6SjNqNXg", "tags": ["Centro centro"], "nota": ""}, {"id": "g0087", "cat": "S16", "tipo": "R", "rival": "Liverpool", "numero": 1, "fecha": null, "orden": 10, "video": "https://www.youtube.com/watch?v=m0XeJw7zXW8", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0088", "cat": "S16", "tipo": "R", "rival": "Defensor", "numero": 2, "fecha": "2026-05-22", "orden": 12, "video": "https://www.youtube.com/watch?v=yCae308-pbY", "tags": ["Centro cruzado"], "nota": ""}, {"id": "g0089", "cat": "S16", "tipo": "R", "rival": "Defensor", "numero": 3, "fecha": "2026-05-22", "orden": 12, "video": "https://www.youtube.com/watch?v=MWtviRkkPYM", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0090", "cat": "S16", "tipo": "R", "rival": "Defensor", "numero": 1, "fecha": "2026-05-22", "orden": 12, "video": "https://www.youtube.com/watch?v=gH_D28CMYo8", "tags": ["Penal"], "nota": ""}, {"id": "g0091", "cat": "S16", "tipo": "R", "rival": "Torque", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=W4H1pTytInw", "tags": ["Duelo perdido"], "nota": ""}, {"id": "g0092", "cat": "S16", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=HgpzF_-JBs4", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0093", "cat": "S16", "tipo": "R", "rival": "Wanderers", "numero": 1, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=zfCyPN4F7ps", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0094", "cat": "S16", "tipo": "R", "rival": "Danubio", "numero": 3, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=2ObpUAuXpsA", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0095", "cat": "S16", "tipo": "R", "rival": "Danubio", "numero": 2, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=CgJzAN6Pf9Y", "tags": ["Penal"], "nota": ""}, {"id": "g0096", "cat": "S16", "tipo": "R", "rival": "Danubio", "numero": 4, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=CgJzAN6Pf9Y", "tags": ["Penal"], "nota": ""}, {"id": "g0097", "cat": "S16", "tipo": "R", "rival": "Danubio", "numero": 1, "fecha": null, "orden": 18, "video": "https://www.youtube.com/watch?v=4T-SGa1Er6M", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0098", "cat": "S15", "tipo": "M", "rival": "Nacional", "numero": 1, "fecha": "2026-02-13", "orden": 5, "video": "https://www.youtube.com/watch?v=RmpIduqzfHg", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0099", "cat": "S15", "tipo": "M", "rival": "River Plate", "numero": 1, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=17THmFzJwog", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0100", "cat": "S15", "tipo": "M", "rival": "River Plate", "numero": 2, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=SknSX7Zq4mA", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0101", "cat": "S15", "tipo": "M", "rival": "River Plate", "numero": 3, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=SknSX7Zq4mA", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0102", "cat": "S15", "tipo": "M", "rival": "Racing", "numero": 2, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=SnRYVDvp3fY", "tags": ["Centro costado"], "nota": ""}, {"id": "g0103", "cat": "S15", "tipo": "M", "rival": "Racing", "numero": 1, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=pQvJ6VtGP1E", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0104", "cat": "S15", "tipo": "M", "rival": "Racing", "numero": 3, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=RsY_ls3xlYY", "tags": ["Penal"], "nota": ""}, {"id": "g0105", "cat": "S15", "tipo": "M", "rival": "Liverpool", "numero": 2, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=qC_r2dz2J00", "tags": ["Centro cruzado"], "nota": ""}, {"id": "g0106", "cat": "S15", "tipo": "M", "rival": "Liverpool", "numero": 1, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=DpxRKOLdsz4", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0107", "cat": "S15", "tipo": "M", "rival": "Liverpool", "numero": 3, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=DpxRKOLdsz4", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0108", "cat": "S15", "tipo": "M", "rival": "Defensor", "numero": 1, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=rKoHTgAEHA8", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0109", "cat": "S15", "tipo": "M", "rival": "Peñarol", "numero": 1, "fecha": null, "orden": 12, "video": "https://www.youtube.com/watch?v=FvdwCigu6m0", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0110", "cat": "S15", "tipo": "M", "rival": "Torque", "numero": 1, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=kRzsT4k17B0", "tags": ["Penal"], "nota": ""}, {"id": "g0111", "cat": "S15", "tipo": "M", "rival": "Juventud", "numero": 1, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=j1iGvGwkJ_c", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0112", "cat": "S15", "tipo": "M", "rival": "Juventud", "numero": 2, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=eelwa0fs0Vg", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0113", "cat": "S15", "tipo": "R", "rival": "Juventud", "numero": 1, "fecha": "2026-02-11", "orden": 4, "video": "https://www.youtube.com/watch?v=ikkairt41uY", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0114", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": "2026-02-13", "orden": 5, "video": "https://www.youtube.com/watch?v=16QT-j3w0lE", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0115", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 4, "fecha": "2026-02-13", "orden": 5, "video": "https://www.youtube.com/watch?v=16QT-j3w0lE", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0116", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 3, "fecha": "2026-02-13", "orden": 5, "video": "https://www.youtube.com/watch?v=16QT-j3w0lE", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0117", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 2, "fecha": "2026-02-13", "orden": 5, "video": "https://www.youtube.com/watch?v=16QT-j3w0lE", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0118", "cat": "S15", "tipo": "R", "rival": "River Plate", "numero": 2, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=qSBwk_rwfF4", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0119", "cat": "S15", "tipo": "R", "rival": "River Plate", "numero": 3, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=LvZ8AxdbA_A", "tags": ["Duelo perdido"], "nota": ""}, {"id": "g0120", "cat": "S15", "tipo": "R", "rival": "River Plate", "numero": 1, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=JJ6o43UE9XQ", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0121", "cat": "S15", "tipo": "R", "rival": "Racing", "numero": 1, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=-Oqv6eF8Zk8", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0122", "cat": "S15", "tipo": "R", "rival": "Racing", "numero": 2, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=-Oqv6eF8Zk8", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0123", "cat": "S15", "tipo": "R", "rival": "Paysandú", "numero": 2, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=76dTzYssMMQ", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0124", "cat": "S15", "tipo": "R", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=w-pIIup1cPQ", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0125", "cat": "S15", "tipo": "R", "rival": "Defensor", "numero": 1, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=I59Dy8s-Kr0", "tags": ["Centro costado"], "nota": ""}, {"id": "g0126", "cat": "S15", "tipo": "R", "rival": "Peñarol", "numero": 1, "fecha": null, "orden": 12, "video": "https://www.youtube.com/watch?v=6BXI45vFPC8", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0127", "cat": "S15", "tipo": "R", "rival": "Torque", "numero": 1, "fecha": null, "orden": 13, "video": "https://www.youtube.com/watch?v=E1BgLi8-i7M", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0128", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 3, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=8ygo1ealpig", "tags": ["Centro centro"], "nota": ""}, {"id": "g0129", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=CV_2-lySJBU", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0130", "cat": "S15", "tipo": "R", "rival": "Nacional", "numero": 2, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=w5KsLyaYwB8", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0131", "cat": "S15", "tipo": "R", "rival": "Wanderers", "numero": 1, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=0VOFpRum-6w", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0132", "cat": "S14", "tipo": "M", "rival": "Boston River", "numero": 3, "fecha": "2026-03-07", "orden": 5, "video": "https://www.youtube.com/watch?v=gDRaUUgUJqs", "tags": ["Penal"], "nota": ""}, {"id": "g0133", "cat": "S14", "tipo": "M", "rival": "Boston River", "numero": 1, "fecha": "2026-03-07", "orden": 5, "video": "https://www.youtube.com/watch?v=lRPazRWU1NA", "tags": ["Pressing alto y transición inmediata"], "nota": ""}, {"id": "g0134", "cat": "S14", "tipo": "M", "rival": "Boston River", "numero": 2, "fecha": "2026-03-07", "orden": 5, "video": "https://www.youtube.com/watch?v=S5T8SoJAFCo", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0135", "cat": "S14", "tipo": "M", "rival": "Boston River", "numero": 4, "fecha": "2026-03-07", "orden": 5, "video": "https://www.youtube.com/watch?v=S5T8SoJAFCo", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0136", "cat": "S14", "tipo": "M", "rival": "River Plate", "numero": 2, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=ncUYNUZjssI", "tags": ["Centro costado"], "nota": ""}, {"id": "g0137", "cat": "S14", "tipo": "M", "rival": "River Plate", "numero": 1, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=MPG4SeKhwOU", "tags": ["Pressing alto y transición inmediata"], "nota": ""}, {"id": "g0138", "cat": "S14", "tipo": "M", "rival": "River Plate", "numero": 3, "fecha": "2026-03-14", "orden": 6, "video": "https://www.youtube.com/watch?v=M9ntuR782PQ", "tags": ["ZF ataque vertical"], "nota": ""}, {"id": "g0139", "cat": "S14", "tipo": "M", "rival": "Racing", "numero": 1, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=HXNFE7tgWWU", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0140", "cat": "S14", "tipo": "M", "rival": "Racing", "numero": 2, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=d3WtCvLYppE", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0141", "cat": "S14", "tipo": "M", "rival": "Racing", "numero": 3, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=d3WtCvLYppE", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0142", "cat": "S14", "tipo": "M", "rival": "Paysandú", "numero": 1, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=1M-eSL5B-iQ", "tags": ["Centro costado"], "nota": ""}, {"id": "g0143", "cat": "S14", "tipo": "M", "rival": "Paysandú", "numero": 3, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=dBjFTlzZHx8", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0144", "cat": "S14", "tipo": "M", "rival": "Paysandú", "numero": 2, "fecha": "2026-04-18", "orden": 8, "video": "https://www.youtube.com/watch?v=IfxAEOoQ-lk", "tags": ["Pase filtrado"], "nota": ""}, {"id": "g0145", "cat": "S14", "tipo": "M", "rival": "Liverpool", "numero": 2, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=sClDDc1il5Y", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0146", "cat": "S14", "tipo": "M", "rival": "Liverpool", "numero": 1, "fecha": null, "orden": 9, "video": "https://www.youtube.com/watch?v=FmUiQGt6UOQ", "tags": ["Penal"], "nota": ""}, {"id": "g0147", "cat": "S14", "tipo": "M", "rival": "Defensor", "numero": null, "fecha": null, "orden": 11, "video": "https://www.youtube.com/watch?v=RQH6oox6Qpk", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0148", "cat": "S14", "tipo": "M", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=l_Xa0lAVPbI", "tags": ["Penal"], "nota": ""}, {"id": "g0149", "cat": "S14", "tipo": "M", "rival": "Juventud", "numero": 1, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=o-1eWsr7agU", "tags": ["Centro centro"], "nota": ""}, {"id": "g0150", "cat": "S14", "tipo": "M", "rival": "Juventud", "numero": 4, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=PKuQixVqJJg", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0151", "cat": "S14", "tipo": "M", "rival": "Juventud", "numero": 2, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=MOCN9lWTTlk", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0152", "cat": "S14", "tipo": "M", "rival": "Juventud", "numero": 5, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=dLi73iDssSU", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0153", "cat": "S14", "tipo": "M", "rival": "Juventud", "numero": 3, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=dLi73iDssSU", "tags": ["Pelota quieta"], "nota": ""}, {"id": "g0154", "cat": "S14", "tipo": "M", "rival": "Wanderers", "numero": 2, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=E43FOs16VRI", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0155", "cat": "S14", "tipo": "M", "rival": "Wanderers", "numero": 1, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=LPv94yw-xiU", "tags": ["Penal"], "nota": ""}, {"id": "g0156", "cat": "S14", "tipo": "R", "rival": "Boston River", "numero": 1, "fecha": "2026-03-07", "orden": 5, "video": "https://www.youtube.com/watch?v=8oS-TuaFVQ0", "tags": ["Penal"], "nota": ""}, {"id": "g0157", "cat": "S14", "tipo": "R", "rival": "Racing", "numero": 1, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=VvjHtxS3-58", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0158", "cat": "S14", "tipo": "R", "rival": "Racing", "numero": 2, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=4UcBuN0HvgA", "tags": ["Remate media distancia"], "nota": ""}, {"id": "g0159", "cat": "S14", "tipo": "R", "rival": "Racing", "numero": 3, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=fVTTN2iUmlI", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0160", "cat": "S14", "tipo": "R", "rival": "Racing", "numero": 4, "fecha": "2026-04-11", "orden": 7, "video": "https://www.youtube.com/watch?v=fVTTN2iUmlI", "tags": ["Contragolpe"], "nota": ""}, {"id": "g0161", "cat": "S14", "tipo": "R", "rival": "Nacional", "numero": 1, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=iu5Xvf3tcRQ", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0162", "cat": "S14", "tipo": "R", "rival": "Nacional", "numero": 2, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=pxU6K_xqQ1U", "tags": ["Gol de salida"], "nota": ""}, {"id": "g0163", "cat": "S14", "tipo": "R", "rival": "Nacional", "numero": 3, "fecha": null, "orden": 14, "video": "https://www.youtube.com/watch?v=ZZzzD7ch8A4", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0164", "cat": "S14", "tipo": "R", "rival": "Juventud", "numero": 1, "fecha": null, "orden": 15, "video": "https://www.youtube.com/watch?v=iV2W6Z0fkuU", "tags": ["Juego aéreo"], "nota": ""}, {"id": "g0165", "cat": "S14", "tipo": "R", "rival": "Wanderers", "numero": 1, "fecha": null, "orden": 16, "video": "https://www.youtube.com/watch?v=OGcUcLw7mvc", "tags": ["Pérdidas en salida"], "nota": ""}, {"id": "g0166", "cat": "S14", "tipo": "R", "rival": "Danubio", "numero": 1, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=LS7BoCFuEqo", "tags": ["Saque lateral"], "nota": ""}, {"id": "g0167", "cat": "S14", "tipo": "R", "rival": "Danubio", "numero": 2, "fecha": null, "orden": 17, "video": "https://www.youtube.com/watch?v=qBAzzU8UjyQ", "tags": ["Penal"], "nota": ""}], "matches": [{"id": "m001", "cat": "S19", "tipo": "M", "rival": "Tercera", "fecha": null, "orden": 5}, {"id": "m002", "cat": "S19", "tipo": "M", "rival": "Peñarol", "fecha": null, "orden": 13}, {"id": "m003", "cat": "S19", "tipo": "M", "rival": "Nacional", "fecha": null, "orden": 15}, {"id": "m004", "cat": "S19", "tipo": "M", "rival": "Juventud", "fecha": null, "orden": 16}, {"id": "m005", "cat": "S19", "tipo": "M", "rival": "Wanderers", "fecha": null, "orden": 17}, {"id": "m006", "cat": "S19", "tipo": "R", "rival": "Tercera", "fecha": null, "orden": 4}, {"id": "m007", "cat": "S19", "tipo": "R", "rival": "Rentista", "fecha": null, "orden": 7}, {"id": "m008", "cat": "S19", "tipo": "R", "rival": "Liverpool", "fecha": null, "orden": 10}, {"id": "m009", "cat": "S19", "tipo": "R", "rival": "Juventud", "fecha": null, "orden": 16}, {"id": "m010", "cat": "S17", "tipo": "M", "rival": "Defensor", "fecha": null, "orden": 11}, {"id": "m011", "cat": "S17", "tipo": "M", "rival": "Peñarol", "fecha": null, "orden": 12}, {"id": "m012", "cat": "S17", "tipo": "M", "rival": "Nacional", "fecha": null, "orden": 14}, {"id": "m013", "cat": "S17", "tipo": "M", "rival": "Juventud", "fecha": null, "orden": 15}, {"id": "m014", "cat": "S17", "tipo": "M", "rival": "Wanderers", "fecha": null, "orden": 16}, {"id": "m015", "cat": "S17", "tipo": "M", "rival": "Danubio", "fecha": null, "orden": 17}, {"id": "m016", "cat": "S17", "tipo": "R", "rival": "Rentista", "fecha": "2026-03-28", "orden": 6}, {"id": "m017", "cat": "S17", "tipo": "R", "rival": "Juventud", "fecha": null, "orden": 15}, {"id": "m018", "cat": "S17", "tipo": "R", "rival": "Danubio", "fecha": null, "orden": 17}, {"id": "m019", "cat": "S16", "tipo": "M", "rival": "Liverpool", "fecha": null, "orden": 9}, {"id": "m020", "cat": "S16", "tipo": "M", "rival": "Defensor", "fecha": null, "orden": 11}, {"id": "m021", "cat": "S16", "tipo": "M", "rival": "Peñarol", "fecha": null, "orden": 12}, {"id": "m022", "cat": "S16", "tipo": "M", "rival": "Juventud", "fecha": null, "orden": 15}, {"id": "m023", "cat": "S16", "tipo": "M", "rival": "Wanderers", "fecha": null, "orden": 16}, {"id": "m024", "cat": "S16", "tipo": "R", "rival": "Bella Vista", "fecha": null, "orden": 11}, {"id": "m025", "cat": "S16", "tipo": "R", "rival": "Peñarol", "fecha": null, "orden": 13}, {"id": "m026", "cat": "S16", "tipo": "R", "rival": "Juventud", "fecha": null, "orden": 16}, {"id": "m027", "cat": "S15", "tipo": "M", "rival": "Juventud", "fecha": null, "orden": 4}, {"id": "m028", "cat": "S15", "tipo": "M", "rival": "Paysandú", "fecha": "2026-04-18", "orden": 8}, {"id": "m029", "cat": "S15", "tipo": "M", "rival": "Bella Vista", "fecha": null, "orden": 10}, {"id": "m030", "cat": "S15", "tipo": "M", "rival": "Nacional", "fecha": null, "orden": 14}, {"id": "m031", "cat": "S15", "tipo": "M", "rival": "Wanderers", "fecha": null, "orden": 16}, {"id": "m032", "cat": "S15", "tipo": "M", "rival": "Danubio", "fecha": null, "orden": 17}, {"id": "m033", "cat": "S15", "tipo": "R", "rival": "Liverpool", "fecha": null, "orden": 9}, {"id": "m034", "cat": "S15", "tipo": "R", "rival": "Bella Vista", "fecha": null, "orden": 10}, {"id": "m035", "cat": "S15", "tipo": "R", "rival": "Juventud", "fecha": null, "orden": 15}, {"id": "m036", "cat": "S15", "tipo": "R", "rival": "Danubio", "fecha": null, "orden": 17}, {"id": "m037", "cat": "S14", "tipo": "M", "rival": "Juventud", "fecha": null, "orden": 4}, {"id": "m038", "cat": "S14", "tipo": "M", "rival": "Bella Vista", "fecha": null, "orden": 10}, {"id": "m039", "cat": "S14", "tipo": "M", "rival": "Peñarol", "fecha": null, "orden": 12}, {"id": "m040", "cat": "S14", "tipo": "M", "rival": "Torque", "fecha": null, "orden": 13}, {"id": "m041", "cat": "S14", "tipo": "M", "rival": "Danubio", "fecha": null, "orden": 17}, {"id": "m042", "cat": "S14", "tipo": "R", "rival": "Juventud", "fecha": null, "orden": 4}, {"id": "m043", "cat": "S14", "tipo": "R", "rival": "River Plate", "fecha": null, "orden": 6}, {"id": "m044", "cat": "S14", "tipo": "R", "rival": "Paysandú", "fecha": "2026-04-18", "orden": 8}, {"id": "m045", "cat": "S14", "tipo": "R", "rival": "Liverpool", "fecha": null, "orden": 9}, {"id": "m046", "cat": "S14", "tipo": "R", "rival": "Bella Vista", "fecha": null, "orden": 10}, {"id": "m047", "cat": "S14", "tipo": "R", "rival": "Defensor", "fecha": null, "orden": 11}, {"id": "m048", "cat": "S14", "tipo": "R", "rival": "Peñarol", "fecha": null, "orden": 12}, {"id": "m049", "cat": "S14", "tipo": "R", "rival": "Torque", "fecha": null, "orden": 13}]};
+
+const CATS = [
+  {id:"S19", label:"Sub 19"},
+  {id:"S17", label:"Sub 17"},
+  {id:"S16", label:"Sub 16"},
+  {id:"S15", label:"Sub 15"},
+  {id:"S14", label:"Sub 14"}
+];
+const CATIDS = CATS.map(c=>c.id);
+const catLabel = id => (CATS.find(c=>c.id===id)||{label:id}).label;
+
+const CONCEPT_TAGS = [
+  "Centro costado","Centro centro","Centro cruzado","Juego aéreo","Gol de salida",
+  "Saque lateral","Pelota quieta","Duelo ganado","Duelo perdido","Remate media distancia",
+  "Contragolpe","Penal","Pase filtrado","Pérdidas en salida","Pressing alto y transición inmediata",
+  "ZF ataque vertical"
+];
+const LABEL_TAGS_BASE = [];
+const TAG_GROUPS = ["Grupal","Individual","Colectivo"];
+const DEFAULT_TAG_GROUPS = {};
+const REMOVED_TAGS = ["Errores defensivos","Error de posicionamiento","No pasar línea de la pelota"];
+
+const KEY = "goles-conceptos-2026";
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov","dic"];
+
+/* ============ estado ============ */
+const state = { goals: [], matches: [], extraTags: [], tagGroups: {} };
+const ui = { view:"TOT", fTipo:"ALL", fTag:null, editing:null, formTags:[], formTipo:null, dirty:false, expandedKeys:new Set() };
+const hasClaudeStore = !!(window.storage && typeof window.storage.get === "function");
+let hasLocalStore = false;
+try{ localStorage.setItem("__t","1"); localStorage.removeItem("__t"); hasLocalStore = true; }catch(e){ hasLocalStore = false; }
+const hasStore = hasClaudeStore || hasLocalStore;
+let seq = 0;
+
+/* ============ utilidades ============ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtFecha = f => { if(!f) return "s/f"; const p=f.split("-"); return (+p[2])+" "+(MESES[+p[1]-1]||p[1]); };
+const uid = () => "u"+Date.now().toString(36)+(seq++).toString(36);
+const cmpCrono = (a,b)=> (a.orden??999)-(b.orden??999)
+  || String(a.fecha||"9999").localeCompare(String(b.fecha||"9999"))
+  || (a.rival||"").localeCompare(b.rival||"","es")
+  || (a.numero||99)-(b.numero||99);
+let toastTimer=null;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),2000); }
+
+/* ============ persistencia ============ */
+function purgeRemovedTags(){
+  let changed = false;
+  state.goals.forEach(g=>{
+    if(g.tags && g.tags.some(t=>REMOVED_TAGS.includes(t))){
+      g.tags = g.tags.filter(t=>!REMOVED_TAGS.includes(t));
+      changed = true;
+    }
+  });
+  REMOVED_TAGS.forEach(t=>{
+    if(state.extraTags.includes(t)){ state.extraTags = state.extraTags.filter(x=>x!==t); changed = true; }
+    if(state.tagGroups[t]!==undefined){ delete state.tagGroups[t]; changed = true; }
+  });
+  return changed;
+}
+async function load(){
+  try{
+    let raw = null;
+    if(hasClaudeStore){ const r = await window.storage.get(KEY); raw = r && r.value; }
+    else if(hasLocalStore){ raw = localStorage.getItem(KEY); }
+    if(raw){
+      const d = JSON.parse(raw);
+      if(d && (d.v===2||d.v===3) && Array.isArray(d.goals)){
+        state.goals=d.goals;
+        state.matches=Array.isArray(d.matches)?d.matches:[];
+        state.extraTags=Array.isArray(d.extraTags)?d.extraTags:[];
+        state.tagGroups = (d.v===3 && d.tagGroups && typeof d.tagGroups==="object") ? d.tagGroups : {...DEFAULT_TAG_GROUPS};
+        if(purgeRemovedTags()) save();
+        return;
+      }
+    }
+  }catch(e){ /* clave inexistente o corrupta: primer uso */ }
+  state.goals = JSON.parse(JSON.stringify(SEED.goals));
+  state.matches = JSON.parse(JSON.stringify(SEED.matches));
+  state.extraTags = [];
+  state.tagGroups = {...DEFAULT_TAG_GROUPS};
+  if(hasStore) save();
+}
+async function save(){
+  ui.dirty = true;
+  if(!hasStore) return;
+  try{
+    const payload = JSON.stringify({v:3, goals:state.goals, matches:state.matches, extraTags:state.extraTags, tagGroups:state.tagGroups});
+    if(hasClaudeStore) await window.storage.set(KEY, payload);
+    else if(hasLocalStore) localStorage.setItem(KEY, payload);
+  }catch(e){ toast("No pude guardar — exportá tus datos"); }
+}
+
+/* ============ derivados ============ */
+function conceptCatalog(){ return CONCEPT_TAGS.slice(); }
+function labelCatalog(){
+  const set = new Set(LABEL_TAGS_BASE);
+  state.goals.forEach(g => (g.tags||[]).forEach(t=>{ if(!CONCEPT_TAGS.includes(t)) set.add(t); }));
+  state.extraTags.forEach(t=>{ if(!CONCEPT_TAGS.includes(t)) set.add(t); });
+  return [...set].sort((a,b)=>a.localeCompare(b,"es"));
+}
+function catalog(){ return conceptCatalog().concat(labelCatalog()); }
+function groupOf(tag){ return state.tagGroups[tag] || DEFAULT_TAG_GROUPS[tag] || "Individual"; }
+function labelsByGroup(){
+  const all = labelCatalog();
+  const out = {}; TAG_GROUPS.forEach(g=>out[g]=[]);
+  all.forEach(t=> out[groupOf(t)].push(t));
+  return out;
+}
+function goalsOf(cat, tipo){
+  return state.goals.filter(g => (cat==null||cat==="ALL"||g.cat===cat) && (tipo==null||tipo==="ALL"||g.tipo===tipo));
+}
+function tagCounts(list){
+  const m = new Map();
+  list.forEach(g => (g.tags||[]).forEach(t => m.set(t,(m.get(t)||0)+1)));
+  return m;
+}
+function rivalesConocidos(){
+  const s = new Set(state.goals.map(g=>g.rival).filter(Boolean));
+  return [...s].sort((a,b)=>a.localeCompare(b,"es"));
+}
+
+/* ============ componentes ============ */
+function scoreboard(scopeCat){
+  const m = goalsOf(scopeCat,"M").length, r = goalsOf(scopeCat,"R").length, d = m-r;
+  const cls = d>0?"pos":(d<0?"neg":"cero");
+  const sig = d>0?"+"+d:(""+d);
+  return `
+  <div class="score">
+    <svg class="mediacancha" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="50" y1="0" x2="50" y2="60" stroke="rgba(235,244,233,.10)" stroke-width=".5"/>
+      <circle cx="50" cy="30" r="13" fill="none" stroke="rgba(235,244,233,.10)" stroke-width=".5"/>
+      <circle cx="50" cy="30" r=".9" fill="rgba(235,244,233,.14)"/>
+    </svg>
+    <div class="score-grid">
+      <div class="score-side m"><div class="score-num">${m}</div><div class="score-lbl">Marcados</div></div>
+      <div class="score-dif"><span class="dif-chip ${cls}">${sig}</span><div class="dif-lbl">Diferencia</div></div>
+      <div class="score-side r"><div class="score-num">${r}</div><div class="score-lbl">Recibidos</div></div>
+    </div>
+  </div>`;
+}
+
+let mirrorSeq = 0;
+function mirrorChart(scopeCat, clickable, tagList){
+  const mC = tagCounts(goalsOf(scopeCat,"M"));
+  const rC = tagCounts(goalsOf(scopeCat,"R"));
+  const base = (tagList||catalog()).map(t=>({t, m:mC.get(t)||0, r:rC.get(t)||0}));
+  const mRows = base.filter(x=>x.m>0).sort((a,b)=> b.m-a.m || a.t.localeCompare(b.t,"es"));
+  const rRows = base.filter(x=>x.r>0).sort((a,b)=> b.r-a.r || a.t.localeCompare(b.t,"es"));
+  const totM = goalsOf(scopeCat,"M").length || 1, totR = goalsOf(scopeCat,"R").length || 1;
+  const col = (rows, tipo) => {
+    if(!rows.length) return `<div class="mempty">Todavía no hay goles ${tipo==="M"?"marcados":"recibidos"} con etiquetas acá.</div>`;
+    const max = Math.max(1, ...rows.map(x=> tipo==="M"?x.m:x.r));
+    const tot = tipo==="M"?totM:totR;
+    return `<div class="mcol">${rows.map(x=>{
+      const n = tipo==="M"?x.m:x.r;
+      const w = Math.max(6, n/max*100);
+      const pct = Math.round(n*100/tot);
+      const title = `${n} ${n===1?"gol":"goles"} ${tipo==="M"?"marcados":"recibidos"} · ${pct}% — ${x.t}`;
+      const tagAttrs = clickable ? `data-act="jump" data-tipo="${tipo}" data-tag="${esc(x.t)}"` : "";
+      const el = clickable ? "button type=\"button\"" : "div";
+      const closeEl = clickable ? "button" : "div";
+      return `<${el} class="mcol-row ${tipo}" ${tagAttrs} title="${esc(title)}">
+        <span class="mcol-label">${esc(x.t)}</span>
+        <span class="mcol-barwrap"><span class="mcol-bar ${tipo}" style="width:${w}%"></span></span>
+        <span class="mcol-n">${n}</span>
+      </${closeEl}>`;
+    }).join("")}</div>`;
+  };
+  const id = "sw"+(mirrorSeq++);
+  return `
+  <div class="mnav" data-mnavgroup="${id}">
+    <button type="button" class="mnavbtn on" data-mnav="0">A favor</button>
+    <button type="button" class="mnavbtn" data-mnav="1">En contra</button>
+  </div>
+  <div class="mswipe" data-mswipe="${id}">
+    <div class="mslide">${col(mRows,"M")}</div>
+    <div class="mslide">${col(rRows,"R")}</div>
+  </div>`;
+}
+
+
+/* ---------- agrupamiento por partido ---------- */
+function groupKeyFor(it){
+  return it.fecha
+    ? `${it.cat}|F|${(it.rival||"").toLowerCase()}|${it.fecha}`
+    : `${it.cat}|N|${it.tipo}|${(it.rival||"").toLowerCase()}|${it.orden??it.id}`;
+}
+function buildGroups(cat){
+  const map = new Map();
+  const take = it => {
+    const key = groupKeyFor(it);
+    let g = map.get(key);
+    if(!g){ g = {key, rival:it.rival, fecha:it.fecha, orden:it.orden, goals:[], matches:[]}; map.set(key,g); }
+    if(it.tags) g.goals.push(it); else g.matches.push(it);
+    if(it.fecha && !g.fecha) g.fecha = it.fecha;
+    if(it.orden!=null && (g.orden==null || it.orden<g.orden)) g.orden = it.orden;
+  };
+  state.goals.filter(x=>x.cat===cat).forEach(take);
+  state.matches.filter(x=>x.cat===cat).forEach(take);
+  let raw = [...map.values()];
+
+  const dated = raw.filter(g=>g.fecha);
+  const undated = raw.filter(g=>!g.fecha);
+
+  // Agrupar los "sin fecha" por rival y lado (M/R); cada uno ya viene clusterizado por fila de origen.
+  const byRival = new Map();
+  undated.forEach(g=>{
+    const rk = (g.rival||"").toLowerCase();
+    if(!byRival.has(rk)) byRival.set(rk, {M:[], R:[]});
+    const side = (g.goals[0]||g.matches[0]).tipo;
+    byRival.get(rk)[side].push(g);
+  });
+
+  const merged = [], leftover = [], noJugados = [];
+  byRival.forEach(sides=>{
+    const Ms = sides.M, Rs = sides.R;
+    // emparejar por cercanía de fila de origen (misma posición aproximada en ambas planillas)
+    const cands = [];
+    Ms.forEach((m,mi)=>Rs.forEach((r,ri)=>cands.push([Math.abs((m.orden??0)-(r.orden??0)), mi, ri])));
+    cands.sort((a,b)=>a[0]-b[0]);
+    const usedM = new Set(), usedR = new Set(), pairs = [];
+    cands.forEach(([,mi,ri])=>{
+      if(usedM.has(mi)||usedR.has(ri)) return;
+      usedM.add(mi); usedR.add(ri); pairs.push([Ms[mi], Rs[ri]]);
+    });
+    pairs.forEach(([gm,gr])=>{
+      const sup = {
+        key: gm.key+"+"+gr.key, rival: gm.rival||gr.rival, fecha:null,
+        orden: Math.min(gm.orden??999, gr.orden??999),
+        goals: gm.goals.concat(gr.goals), matches: gm.matches.concat(gr.matches)
+      };
+      if(sup.goals.length===0) noJugados.push(sup); else merged.push(sup);
+    });
+    Ms.forEach((m,mi)=>{ if(!usedM.has(mi)){ if(m.goals.length===0) noJugados.push(m); else leftover.push(m); } });
+    Rs.forEach((r,ri)=>{ if(!usedR.has(ri)){ if(r.goals.length===0) noJugados.push(r); else leftover.push(r); } });
+  });
+
+  let groups = dated.concat(merged, leftover).map(g=>{
+    g.m = g.goals.filter(x=>x.tipo==="M").length;
+    g.r = g.goals.filter(x=>x.tipo==="R").length;
+    g.hasM = g.m>0 || g.matches.some(x=>x.tipo==="M");
+    g.hasR = g.r>0 || g.matches.some(x=>x.tipo==="R");
+    return g;
+  });
+  groups.sort((a,b)=>
+    String(a.fecha||"9999").localeCompare(String(b.fecha||"9999")) ||
+    (a.orden??999)-(b.orden??999) ||
+    (a.rival||"").localeCompare(b.rival||"","es"));
+  groups.noJugados = noJugados.map(g=>g.rival||"rival s/d");
+  return groups;
+}
+
+function goalLine(g, hl){
+  const tags = (g.tags&&g.tags.length)
+    ? g.tags.map(t=>`<button class="tagchip ${ui.fTag===t?"on":""}" data-act="ftag" data-tag="${esc(t)}" title="Ver goles con esta etiqueta">${esc(t)}</button>`).join("")
+    : `<span class="tagchip none">sin etiquetas</span>`;
+  return `
+  <div class="gl-row ${hl?"hl":""}">
+    <span class="gl-badge ${g.tipo}">${g.tipo}</span>
+    <span class="gl-num">${g.numero?esc(g.numero+"°"):"—"}</span>
+    <div class="gl-tags">${tags}</div>
+    <div class="gl-acts">
+      ${g.video?`<a class="iconb play" href="${esc(g.video)}" target="_blank" rel="noopener" title="Ver video" aria-label="Ver video">▶</a>`:""}
+      <button class="iconb" data-act="edit" data-id="${esc(g.id)}" title="Editar gol" aria-label="Editar gol">✎</button>
+    </div>
+  </div>${g.nota?`<div class="gl-note" style="border-bottom:1px solid var(--cal)"><span>${esc(g.nota)}</span></div>`:""}`;
+}
+
+function matchCard(g, forceOpen){
+  const open = forceOpen || ui.expandedKeys.has(g.key);
+  const scope = ui.fTipo; // ALL | M | R
+  const showM = scope!=="R", showR = scope!=="M";
+  const matchTag = it => ui.fTag==="__none__" ? !(it.tags&&it.tags.length) : (ui.fTag ? (it.tags||[]).includes(ui.fTag) : false);
+
+  const mLines = showM ? g.goals.filter(x=>x.tipo==="M").map(x=>goalLine(x, matchTag(x))).join("") : "";
+  const rLines = showR ? g.goals.filter(x=>x.tipo==="R").map(x=>goalLine(x, matchTag(x))).join("") : "";
+  const mNote = (showM && g.hasM && g.m===0) ? `<div class="gl-note"><span>No marcó en este partido</span></div>` : "";
+  const rNote = (showR && g.hasR && g.r===0) ? `<div class="gl-note"><span>No recibió goles · valla en cero</span></div>` : "";
+
+  const scoreHtml = (g.goals.length>0)
+    ? `<span class="mc-score"><span class="sm">${g.m}</span><span class="sep">–</span><span class="sr">${g.r}</span></span>`
+    : `<span class="mc-score"><span class="${g.hasM?"sm":"unk"}">${g.hasM?g.m:"—"}</span><span class="sep">–</span><span class="${g.hasR?"sr":"unk"}">${g.hasR?g.r:"—"}</span></span>`;
+
+  return `
+  <div class="mcard ${open?"open":""}">
+    <button class="mc-head" data-act="togglecard" data-key="${esc(g.key)}">
+      <span class="mc-rival"><span class="vs">vs</span> ${esc(g.rival||"Rival s/d")}</span>
+      <span class="mc-fecha">${g.fecha?fmtFecha(g.fecha):"s/f"}</span>
+      ${scoreHtml}
+      <span class="mc-chev">▾</span>
+    </button>
+    <div class="mc-body"><div class="mc-body-in">
+      ${mLines}${mNote}${rLines}${rNote}
+    </div></div>
+  </div>`;
+}
+
+/* ============ vistas ============ */
+function labelGroupAccordion(scopeCat, groupName, tags, clickable, hintSuffix){
+  return `
+  <div class="sec-wrap subacc">
+    <button type="button" class="sec-toggle sub" data-act="toggleSection" aria-expanded="false">
+      <h2>${esc(groupName)}</h2><div class="rule"></div><span class="tag-count">${tags.length}</span><span class="sec-chev">▾</span>
+    </button>
+    <div class="sec-collapse"><div class="sec-collapse-in">
+      ${tags.length ? mirrorChart(scopeCat, clickable, tags) : `<div class="mempty">Todavía no hay etiquetas en "${esc(groupName)}".</div>`}
+      ${tags.length ? `<p class="hint">${clickable?"Tocá una etiqueta para filtrar los partidos.":"Suma de las cinco categorías."}${hintSuffix||""}</p>` : ""}
+    </div></div>
+  </div>`;
+}
+function renderTotales(){
+  return `
+  <section>
+    ${scoreboard("ALL")}
+  </section>
+  <section>
+    <div class="sec-t"><h2>Conceptos</h2><div class="rule"></div></div>
+    ${mirrorChart("ALL", false, conceptCatalog())}
+    <p class="hint">Suma de las cinco categorías. Elegí una categoría en las pestañas de arriba para ver su detalle y tocar un concepto.</p>
+  </section>
+  <section class="sec-wrap">
+    <button type="button" class="sec-toggle" data-act="toggleSection" aria-expanded="false">
+      <h2>Etiquetas</h2><div class="rule"></div><span class="sec-chev">▾</span>
+    </button>
+    <div class="sec-collapse"><div class="sec-collapse-in">
+      ${TAG_GROUPS.map(g=>labelGroupAccordion("ALL", g, labelsByGroup()[g], false)).join("")}
+    </div></div>
+  </section>`;
+}
+
+function renderCategoria(cat){
+  let groups = buildGroups(cat);
+  let forceOpenKeys = new Set();
+  if(ui.fTipo==="M") groups = groups.filter(g=>g.hasM);
+  else if(ui.fTipo==="R") groups = groups.filter(g=>g.hasR);
+
+  if(ui.fTag){
+    const inScope = it => ui.fTipo==="ALL" || it.tipo===ui.fTipo;
+    const tagMatch = it => ui.fTag==="__none__" ? !(it.tags&&it.tags.length) : (it.tags||[]).includes(ui.fTag);
+    groups = groups.filter(g => g.goals.some(x=>inScope(x)&&tagMatch(x)));
+    groups.forEach(g=>forceOpenKeys.add(g.key));
+  }
+
+  const scoped = goalsOf(cat, ui.fTipo);
+  const counts = tagCounts(scoped);
+  const sinTag = scoped.filter(g=>!(g.tags&&g.tags.length)).length;
+  const tagChips = catalog()
+    .map(t=>({t, n: counts.get(t)||0}))
+    .filter(x=>x.n || ui.fTag===x.t)
+    .sort((a,b)=> b.n-a.n || a.t.localeCompare(b.t,"es"))
+    .map(x=>`<button class="chip ${ui.fTag===x.t?"on":""}" data-act="ftag" data-tag="${esc(x.t)}">${esc(x.t)}<span class="n">${x.n}</span></button>`)
+    .join("") + (sinTag?`<button class="chip ${ui.fTag==="__none__"?"on":""}" data-act="ftag" data-tag="__none__">Sin etiquetas<span class="n">${sinTag}</span></button>`:"");
+
+  return `
+  <section>
+    <div class="cat-head">
+      <h2>${catLabel(cat)}</h2>
+    </div>
+    ${scoreboard(cat)}
+  </section>
+  <section>
+    <div class="sec-t"><h2>Conceptos</h2><div class="rule"></div></div>
+    ${mirrorChart(cat, true, conceptCatalog())}
+    <p class="hint">Tocá un concepto para filtrar los partidos.</p>
+  </section>
+  <section>
+    <div class="sec-t"><h2>Partidos · ${groups.length}</h2><div class="rule"></div></div>
+    <div class="filters">
+      <span class="seg">
+        <button class="${ui.fTipo==="ALL"?"on":""}" data-act="ftipo" data-tipo="ALL">Todos</button>
+        <button class="segM ${ui.fTipo==="M"?"on":""}" data-act="ftipo" data-tipo="M">Marcados</button>
+        <button class="segR ${ui.fTipo==="R"?"on":""}" data-act="ftipo" data-tipo="R">Recibidos</button>
+      </span>
+      <div class="chipsbar">
+        <button type="button" class="chipsnav" data-chipsnav="-1" aria-label="Ver etiquetas anteriores">‹</button>
+        <div class="chips">${tagChips}</div>
+        <button type="button" class="chipsnav" data-chipsnav="1" aria-label="Ver más etiquetas">›</button>
+      </div>
+    </div>
+    ${groups.length ? `
+    <div class="matchlist">${groups.map(g=>matchCard(g, forceOpenKeys.has(g.key))).join("")}</div>
+    <p class="hint">Tocá una tarjeta para ver los goles de ese partido; tocá una etiqueta para filtrar.</p>` :
+    `<div class="empty">No hay partidos con este filtro.<br><button class="btn" data-act="clearf">Limpiar filtros</button></div>`}
+    ${groups.noJugados && groups.noJugados.length ? `<p class="hint">${groups.noJugados.length} partido${groups.noJugados.length>1?"s":""} sin goles registrados en ninguna planilla (no disputado${groups.noJugados.length>1?"s":""}): ${groups.noJugados.map(esc).join(", ")}.</p>` : ""}
+  </section>
+  <section class="sec-wrap">
+    <button type="button" class="sec-toggle" data-act="toggleSection" aria-expanded="false">
+      <h2>Etiquetas</h2><div class="rule"></div><span class="sec-chev">▾</span>
+    </button>
+    <div class="sec-collapse"><div class="sec-collapse-in">
+      ${TAG_GROUPS.map(g=>labelGroupAccordion(cat, g, labelsByGroup()[g], true)).join("")}
+    </div></div>
+  </section>`;
+}
+
+function renderTabs(){
+  const tabs = [{id:"TOT",label:"Totales"}].concat(CATS.map(c=>({id:c.id,label:c.id})));
+  $("#tabs").innerHTML = tabs.map(t=>
+    `<button class="tab ${ui.view===t.id?"on":""}" data-view="${t.id}">${t.label}</button>`).join("");
+}
+
+function render(){
+  renderTabs();
+  $("#app").innerHTML = ui.view==="TOT" ? renderTotales() : renderCategoria(ui.view);
+  const n = state.goals.length;
+  $("#pieInfo").textContent = `${n} goles y ${state.matches.length} partidos sin goles · base: planilla Goles R y M 2026 (S14–S19)`;
+}
+
+/* ============ modal ============ */
+let lastFocus = null;
+function tagChipHtml(t, deletable){
+  const on = ui.formTags.includes(t);
+  return `<span class="chipwrap">
+    <button type="button" class="chip ${on?"on":""}" data-ftag="${esc(t)}">${esc(t)}</button>
+    ${deletable?`<button type="button" class="chipdel" data-deltag="${esc(t)}" title="Eliminar esta etiqueta de todos los goles" aria-label="Eliminar etiqueta ${esc(t)}">×</button>`:""}
+  </span>`;
+}
+function fillTagcloud(){
+  const concepts = conceptCatalog().map(t=>tagChipHtml(t,false)).join("");
+  const byGroup = labelsByGroup();
+  const groupsHtml = TAG_GROUPS.map(g=>{
+    const tags = byGroup[g];
+    return `<div class="tc-h sub">${g}</div>
+      <div class="tc-row">${tags.length ? tags.map(t=>tagChipHtml(t,true)).join("") : '<span class="tc-empty">Sin etiquetas acá todavía.</span>'}</div>`;
+  }).join("");
+  $("#tagcloud").innerHTML = `
+    <div class="tc-h">Conceptos</div>
+    <div class="tc-row">${concepts}</div>
+    <div class="tc-h">Etiquetas</div>
+    ${groupsHtml}`;
+}
+function deleteTagEverywhere(tag){
+  state.goals.forEach(g=>{ if(g.tags && g.tags.length) g.tags = g.tags.filter(x=>x!==tag); });
+  state.extraTags = state.extraTags.filter(x=>x!==tag);
+  delete state.tagGroups[tag];
+  const i = ui.formTags.indexOf(tag); if(i>=0) ui.formTags.splice(i,1);
+  if(ui.fTag===tag) ui.fTag = null;
+  save();
+  fillTagcloud();
+  render();
+  toast(`Etiqueta "${tag}" eliminada`);
+}
+function openModal(goal, pre){
+  lastFocus = document.activeElement;
+  ui.editing = goal ? goal.id : null;
+  ui.formTags = goal ? (goal.tags||[]).slice() : [];
+  ui.formTipo = goal ? goal.tipo : (pre && pre.tipo && pre.tipo!=="ALL" ? pre.tipo : null);
+  $("#modalT").textContent = goal ? "Editar gol" : "Cargar gol";
+  $("#btnDel").hidden = !goal;
+  $("#fCat").innerHTML = CATS.map(c=>`<option value="${c.id}">${c.label}</option>`).join("");
+  $("#fCat").value = goal ? goal.cat : (pre && pre.cat && pre.cat!=="TOT" && pre.cat!=="ALL" ? pre.cat : CATIDS[0]);
+  $("#fRival").value = goal ? (goal.rival||"") : "";
+  $("#fNum").value = goal && goal.numero ? goal.numero : "";
+  $("#fFecha").value = goal && goal.fecha ? goal.fecha : "";
+  $("#fVideo").value = goal && goal.video ? goal.video : "";
+  $("#fNota").value = goal && goal.nota ? goal.nota : "";
+  $("#fNewTag").value = "";
+  $("#ferr").textContent = "";
+  $("#rivales").innerHTML = rivalesConocidos().map(r=>`<option value="${esc(r)}">`).join("");
+  paintTipo(); fillTagcloud();
+  $("#overlay").classList.add("open");
+  $("#fab").style.display = "none";
+  setTimeout(()=>$("#fRival").focus(), 40);
+}
+function closeModal(){
+  $("#overlay").classList.remove("open");
+  $("#fab").style.display = "";
+  if(lastFocus && lastFocus.focus) lastFocus.focus();
+}
+function paintTipo(){
+  $("#segM").className = ui.formTipo==="M" ? "onM" : "";
+  $("#segR").className = ui.formTipo==="R" ? "onR" : "";
+}
+function saveGoal(){
+  const rival = $("#fRival").value.trim();
+  const cat = $("#fCat").value;
+  if(!ui.formTipo){ $("#ferr").textContent = "Elegí si el gol fue marcado o recibido."; return; }
+  if(!CATIDS.includes(cat)){ $("#ferr").textContent = "Elegí la categoría."; return; }
+  if(!rival){ $("#ferr").textContent = "Falta el rival."; return; }
+  const video = $("#fVideo").value.trim();
+  if(video && !/^https?:\/\//i.test(video)){ $("#ferr").textContent = "El link tiene que empezar con http:// o https://"; return; }
+  const numRaw = $("#fNum").value.trim();
+  const goal = {
+    id: ui.editing || uid(),
+    cat, tipo: ui.formTipo, rival,
+    numero: numRaw ? Math.max(1, parseInt(numRaw,10)||1) : null,
+    fecha: $("#fFecha").value || null,
+    video: video || null,
+    tags: ui.formTags.slice(),
+    nota: $("#fNota").value.trim()
+  };
+  if(ui.editing){
+    const i = state.goals.findIndex(g=>g.id===ui.editing);
+    if(i>=0) state.goals[i] = goal;
+  } else {
+    state.goals.push(goal);
+  }
+  save();
+  closeModal();
+  toast(ui.editing ? "Gol actualizado" : "Gol guardado");
+  if(ui.view!=="TOT" && ui.view!==goal.cat){ ui.view = goal.cat; ui.fTipo="ALL"; ui.fTag=null; }
+  render();
+}
+function deleteGoal(){
+  const g = state.goals.find(x=>x.id===ui.editing);
+  if(!g) return;
+  if(!confirm(`¿Eliminar el gol vs ${g.rival||"rival"}? Esta acción no se puede deshacer.`)) return;
+  state.goals = state.goals.filter(x=>x.id!==ui.editing);
+  save(); closeModal(); toast("Gol eliminado"); render();
+}
+
+/* ============ datos: exportar / importar / restaurar ============ */
+function doExport(){
+  const blob = new Blob([JSON.stringify({v:3, goals:state.goals, matches:state.matches, extraTags:state.extraTags, tagGroups:state.tagGroups}, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "goles-conceptos-2026.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  toast("Datos exportados");
+}
+function doImport(file){
+  const rd = new FileReader();
+  rd.onload = () => {
+    try{
+      const d = JSON.parse(rd.result);
+      const goals = Array.isArray(d) ? d : (d && Array.isArray(d.goals) ? d.goals : null);
+      if(!goals) throw new Error("formato");
+      const clean = goals.filter(g => g && CATIDS.includes(g.cat) && (g.tipo==="M"||g.tipo==="R"))
+        .map((g,i)=>({
+          id: g.id || ("i"+i+uid()),
+          cat: g.cat, tipo: g.tipo,
+          rival: String(g.rival||"Rival s/d"),
+          numero: g.numero!=null && !isNaN(+g.numero) ? +g.numero : null,
+          fecha: g.fecha || null,
+          video: g.video || null,
+          tags: Array.isArray(g.tags) ? g.tags.map(String) : [],
+          nota: String(g.nota||"")
+        }));
+      if(!clean.length) throw new Error("vacío");
+      if(!confirm(`El archivo tiene ${clean.length} goles. ¿Reemplazar los datos actuales (${state.goals.length} goles)?`)) return;
+      state.goals = clean;
+      state.matches = (d && Array.isArray(d.matches)) ? d.matches : [];
+      state.extraTags = (d && Array.isArray(d.extraTags)) ? d.extraTags.map(String) : [];
+      state.tagGroups = (d && d.tagGroups && typeof d.tagGroups==="object") ? d.tagGroups : {...DEFAULT_TAG_GROUPS};
+      purgeRemovedTags();
+      save(); ui.view="TOT"; ui.fTag=null; ui.fTipo="ALL"; render();
+      toast("Datos importados");
+    }catch(e){ toast("No pude leer ese archivo"); }
+  };
+  rd.readAsText(file);
+}
+function doReset(){
+  if(!confirm("¿Restaurar los datos originales de la planilla? Se pierden los goles y etiquetas que hayas agregado acá.")) return;
+  state.goals = JSON.parse(JSON.stringify(SEED.goals));
+  state.matches = JSON.parse(JSON.stringify(SEED.matches));
+  state.extraTags = [];
+  state.tagGroups = {...DEFAULT_TAG_GROUPS};
+  save(); ui.view="TOT"; ui.fTag=null; ui.fTipo="ALL"; render();
+  toast("Planilla restaurada");
+}
+
+/* ============ informe PDF ============ */
+function printRows(scopeCat, tagList){
+  const mC = tagCounts(goalsOf(scopeCat,"M"));
+  const rC = tagCounts(goalsOf(scopeCat,"R"));
+  const rows = tagList
+    .map(t=>({t, m:mC.get(t)||0, r:rC.get(t)||0}))
+    .filter(x=>x.m||x.r)
+    .sort((a,b)=> Math.max(b.m,b.r)-Math.max(a.m,a.r) || (b.m+b.r)-(a.m+a.r) || a.t.localeCompare(b.t,"es"));
+  if(!rows.length) return `<div class="pempty">Sin datos registrados todavía.</div>`;
+  const max = Math.max(1, ...rows.map(x=>Math.max(x.m,x.r)));
+  return `<div class="pmirror">${rows.map(x=>{
+    const wm = x.m? Math.max(8, x.m/max*100) : 0, wr = x.r? Math.max(8, x.r/max*100) : 0;
+    return `
+    <div class="prow">
+      <div class="pside l"><span class="pnum">${x.m||"·"}</span>${x.m?`<span class="pbar" style="width:${wm}%"></span>`:""}</div>
+      <div class="plabel">${esc(x.t)}</div>
+      <div class="pside r">${x.r?`<span class="pbar" style="width:${wr}%"></span>`:""}<span class="pnum">${x.r||"·"}</span></div>
+    </div>`;
+  }).join("")}</div>`;
+}
+function printHead(escudoSrc, kicker){
+  return `
+  <div class="phead">
+    <img src="${escudoSrc}" alt="Escudo Deportivo Maldonado">
+    <div>
+      <div class="pk">Deportivo Maldonado · Coordinación Juvenil</div>
+      <div class="ps">#FormandoEnMaldonado</div>
+    </div>
+    <div class="pright">Temporada 2026<br>Campeonato Uruguayo</div>
+  </div>`;
+}
+function printCoverPage(escudoSrc){
+  const m = goalsOf("ALL","M").length, r = goalsOf("ALL","R").length, d = m-r;
+  const rowsTable = CATIDS.map(c=>{
+    const cm = goalsOf(c,"M").length, cr = goalsOf(c,"R").length, cd = cm-cr;
+    return `<tr><td>${catLabel(c)}</td><td>${cm}</td><td>${cr}</td><td class="${cd>0?"dpos":cd<0?"dneg":""}">${cd>0?"+"+cd:cd}</td></tr>`;
+  }).join("");
+  return `
+  <section class="ppage">
+    ${printHead(escudoSrc)}
+    <div class="ptitle">Informe de goles por concepto</div>
+    <div class="psub">Resumen general de la temporada — cinco categorías formativas (Sub 19 a Sub 14)</div>
+    <div class="pscore">
+      <div class="side m"><div class="num">${m}</div><div class="lbl">Marcados</div></div>
+      <div class="dif"><span class="chip">${d>0?"+"+d:d}</span><div class="lbl" style="margin-top:4px">Diferencia</div></div>
+      <div class="side r"><div class="num">${r}</div><div class="lbl">Recibidos</div></div>
+    </div>
+    <div class="psectitle">Resultado por categoría</div>
+    <table class="ptable">
+      <thead><tr><th>Categoría</th><th>Marcados</th><th>Recibidos</th><th>Diferencia</th></tr></thead>
+      <tbody>${rowsTable}</tbody>
+    </table>
+    <div class="psectitle">Conceptos · a favor vs en contra</div>
+    ${printRows("ALL", conceptCatalog())}
+    <div class="psectitle">Etiquetas · acciones dentro del gol</div>
+    ${printRows("ALL", labelCatalog())}
+    <div class="pfoot"><span>Informe generado desde la app de goles por concepto</span><span>Deportivo Maldonado 2026</span></div>
+  </section>`;
+}
+function printCatPage(escudoSrc, cat){
+  const m = goalsOf(cat,"M").length, r = goalsOf(cat,"R").length, d = m-r;
+  const tm = goalsOf("ALL","M").length||1, tr = goalsOf("ALL","R").length||1;
+  const pm = Math.round(m*100/tm), pr = Math.round(r*100/tr);
+  return `
+  <section class="ppage">
+    ${printHead(escudoSrc)}
+    <div class="ptitle">${esc(catLabel(cat))}</div>
+    <div class="psub">Temporada 2026 · Campeonato Uruguayo · Formativas</div>
+    <div class="pscore">
+      <div class="side m"><div class="num">${m}</div><div class="lbl">Marcados</div></div>
+      <div class="dif"><span class="chip">${d>0?"+"+d:d}</span><div class="lbl" style="margin-top:4px">Diferencia</div></div>
+      <div class="side r"><div class="num">${r}</div><div class="lbl">Recibidos</div></div>
+    </div>
+    <div class="pcompare"><b>${m}</b> de ${tm} goles marcados de la temporada (${pm}%) · <b>${r}</b> de ${tr} recibidos (${pr}%)</div>
+    <div class="psectitle">Conceptos · a favor vs en contra</div>
+    ${printRows(cat, conceptCatalog())}
+    <div class="psectitle">Etiquetas · acciones dentro del gol</div>
+    ${printRows(cat, labelCatalog())}
+    <div class="pfoot"><span>Informe generado desde la app de goles por concepto</span><span>Deportivo Maldonado 2026</span></div>
+  </section>`;
+}
+function buildPrintReport(){
+  const escudoSrc = document.querySelector(".escudo").src;
+  const html = printCoverPage(escudoSrc) + CATIDS.map(c=>printCatPage(escudoSrc, c)).join("");
+  $("#printRoot").innerHTML = `<div class="preport">${html}</div>`;
+}
+function doExportPDF(){
+  buildPrintReport();
+  requestAnimationFrame(()=> requestAnimationFrame(()=> window.print()));
+}
+window.addEventListener("beforeprint", ()=>{ if(!$("#printRoot").innerHTML.trim()) buildPrintReport(); });
+window.addEventListener("afterprint", ()=>{ $("#printRoot").innerHTML=""; });
+
+/* ============ eventos ============ */
+$("#app").addEventListener("scroll", e=>{
+  const sw = e.target.closest && e.target.closest(".mswipe"); if(!sw) return;
+  const idx = Math.round(sw.scrollLeft / Math.max(1,sw.clientWidth));
+  const nav = sw.previousElementSibling; if(!nav || !nav.classList.contains("mnav")) return;
+  [...nav.children].forEach((c,i)=>c.classList.toggle("on", i===idx));
+}, true);
+
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-view]"); if(!b) return;
+  ui.view = b.dataset.view; ui.fTipo="ALL"; ui.fTag=null;
+  render(); window.scrollTo({top:0});
+});
+
+$("#app").addEventListener("click", e => {
+  const cnav = e.target.closest("[data-chipsnav]");
+  if(cnav){
+    const chips = cnav.parentElement.querySelector(".chips");
+    const dx = +cnav.dataset.chipsnav * Math.round(chips.clientWidth*0.85);
+    if(typeof chips.scrollBy === "function") chips.scrollBy({left:dx, behavior:"smooth"}); else chips.scrollLeft += dx;
+    return;
+  }
+  const nav = e.target.closest("[data-mnav]");
+  if(nav){
+    const idx = +nav.dataset.mnav;
+    const sw = nav.closest(".mnav").nextElementSibling;
+    const left = idx*sw.clientWidth;
+    if(typeof sw.scrollTo === "function") sw.scrollTo({left, behavior:"smooth"}); else sw.scrollLeft = left;
+    [...nav.parentElement.children].forEach(c=>c.classList.toggle("on", c===nav));
+    return;
+  }
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const act = b.dataset.act;
+  if(act==="jump"){
+    ui.fTipo=b.dataset.tipo; ui.fTag=b.dataset.tag; render();
+  }
+  else if(act==="ftipo"){ ui.fTipo=b.dataset.tipo; render(); }
+  else if(act==="ftag"){ ui.fTag = (ui.fTag===b.dataset.tag) ? null : b.dataset.tag; render(); }
+  else if(act==="togglecard"){
+    const k = b.dataset.key;
+    if(ui.expandedKeys.has(k)) ui.expandedKeys.delete(k); else ui.expandedKeys.add(k);
+    b.closest(".mcard").classList.toggle("open");
+  }
+  else if(act==="toggleSection"){
+    const wrap = b.closest(".sec-wrap");
+    const open = wrap.classList.toggle("open");
+    b.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  else if(act==="clearf"){ ui.fTipo="ALL"; ui.fTag=null; render(); }
+  else if(act==="edit"){ const g=state.goals.find(x=>x.id===b.dataset.id); if(g) openModal(g,null); }
+  else if(act==="delmatch"){
+    const p = state.matches.find(x=>x.id===b.dataset.id);
+    if(p && confirm(`¿Sacar de la lista el partido vs ${p.rival||"rival s/d"} (${p.tipo==="M"?"sin goles marcados":"sin goles recibidos"})?`)){
+      state.matches = state.matches.filter(x=>x.id!==p.id);
+      save(); render(); toast("Partido eliminado");
+    }
+  }
+});
+
+$("#fab").addEventListener("click", ()=>openModal(null,{cat:ui.view,tipo:ui.fTipo}));
+$("#btnNuevoTop").addEventListener("click", ()=>openModal(null,{cat:ui.view,tipo:ui.fTipo}));
+$("#btnCancel").addEventListener("click", closeModal);
+$("#btnSave").addEventListener("click", saveGoal);
+$("#btnDel").addEventListener("click", deleteGoal);
+$("#segM").addEventListener("click", ()=>{ ui.formTipo="M"; paintTipo(); });
+$("#segR").addEventListener("click", ()=>{ ui.formTipo="R"; paintTipo(); });
+$("#overlay").addEventListener("click", e=>{ if(e.target===e.currentTarget) closeModal(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && $("#overlay").classList.contains("open")) closeModal(); });
+
+$("#tagcloud").addEventListener("click", e=>{
+  const del = e.target.closest("[data-deltag]");
+  if(del){
+    const t = del.dataset.deltag;
+    if(confirm(`¿Eliminar la etiqueta "${t}" de todos los goles y de la lista? No se puede deshacer.`)) deleteTagEverywhere(t);
+    return;
+  }
+  const b = e.target.closest("[data-ftag]"); if(!b) return;
+  const t = b.dataset.ftag;
+  const i = ui.formTags.indexOf(t);
+  if(i>=0) ui.formTags.splice(i,1); else ui.formTags.push(t);
+  fillTagcloud();
+});
+$("#btnAddTag").addEventListener("click", addNewTag);
+$("#fNewTag").addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); addNewTag(); } });
+function addNewTag(){
+  const v = $("#fNewTag").value.trim();
+  if(!v) return;
+  const existente = catalog().find(t=>t.toLowerCase()===v.toLowerCase());
+  const tag = existente || v;
+  if(!existente){
+    state.extraTags.push(tag);
+    state.tagGroups[tag] = $("#fNewTagGrupo").value;
+  }
+  if(!ui.formTags.includes(tag)) ui.formTags.push(tag);
+  $("#fNewTag").value = "";
+  save();
+  fillTagcloud();
+}
+
+$("#menuDatos").addEventListener("click", e=>{
+  const b = e.target.closest("[data-md]"); if(!b) return;
+  $("#menuDatos").removeAttribute("open");
+  if(b.dataset.md==="export") doExport();
+  else if(b.dataset.md==="pdf") doExportPDF();
+  else if(b.dataset.md==="import") $("#fileImport").click();
+  else if(b.dataset.md==="reset") doReset();
+});
+document.addEventListener("click", e=>{
+  const m = $("#menuDatos");
+  if(m.hasAttribute("open") && !m.contains(e.target)) m.removeAttribute("open");
+});
+$("#fileImport").addEventListener("change", e=>{
+  if(e.target.files && e.target.files[0]) doImport(e.target.files[0]);
+  e.target.value = "";
+});
+
+window.addEventListener("beforeunload", e=>{
+  if(!hasStore && ui.dirty){ e.preventDefault(); e.returnValue=""; }
+});
+
+/* ============ acceso ============ */
+const LOCK_PASS = "deportivo1928";
+const LOCK_KEY = "goles-conceptos-2026-auth";
+function unlock(){
+  $("#lockscreen").classList.add("hidden");
+}
+try{
+  $("#lockEscudo").src = $(".escudo").src;
+}catch(e){}
+try{
+  if(localStorage.getItem(LOCK_KEY)==="ok") unlock();
+}catch(e){}
+$("#lockform").addEventListener("submit", e=>{
+  e.preventDefault();
+  const v = $("#lockPass").value;
+  if(v===LOCK_PASS){
+    try{ localStorage.setItem(LOCK_KEY,"ok"); }catch(e){}
+    unlock();
+  }else{
+    $("#lockErr").textContent = "Contraseña incorrecta.";
+    $("#lockPass").value = "";
+    $("#lockPass").focus();
+  }
+});
+
+/* ============ arranque ============ */
+(async function(){
+  await load();
+  $("#storeNote").textContent = hasStore
+    ? "Los cambios se guardan automáticamente en esta vista."
+    : "Sin guardado automático acá: exportá para respaldar.";
+  render();
+})();
+</script>
+</body>
+</html>
