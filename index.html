@@ -28,8 +28,7 @@ html[data-theme="light"]{
   --amarillo:#9A7A12; --oro:#C9A227; --hdr:rgba(243,245,240,.94);
 }
 [data-theme="light"] body{background-image:none}
-[data-theme="light"] .escudo,[data-theme="light"] .lockescudo{filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
-.fab,.toast{color:var(--campo)!important}
+[data-theme="light"] .escudo,[data-theme="light"] .fab,.toast{color:var(--campo)!important}
 .themebtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--cal-fuerte);display:inline-flex;align-items:center;justify-content:center;font-size:16px;color:var(--tiza);flex-shrink:0}
 .themebtn:hover{background:var(--panel2)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -357,35 +356,11 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
 .ptable td.dpos{color:#146C34;font-weight:700} .ptable td.dneg{color:#B23122;font-weight:700}
 .pfoot{margin-top:16px;padding-top:8px;border-top:1px solid #E2E6DF;font-size:9.5px;color:#9aa192;display:flex;justify-content:space-between}
 /* ---------- pantalla de acceso ---------- */
-.lockscreen{position:fixed;inset:0;z-index:500;background:var(--campo);display:flex;align-items:center;justify-content:center;padding:20px}
-.lockscreen.hidden{display:none}
-.lockcard{width:100%;max-width:340px;background:var(--panel);border:1px solid var(--cal);border-radius:20px;padding:28px 24px 24px;text-align:center}
-.lockescudo{height:64px;width:auto;margin:0 auto 14px;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
-.lockkicker{font-family:var(--cond);font-weight:600;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tiza2)}
-.lockcard h2{font-family:var(--cond);font-weight:700;font-size:24px;letter-spacing:.02em;text-transform:uppercase;margin-top:4px}
-.lockcard h2 .x{color:var(--oro)}
-.locksub{font-size:12.5px;color:var(--tiza2);margin:8px 0 16px}
-.lockcard input{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--cal-fuerte);background:var(--campo);
   color:var(--tiza);font-size:15px;text-align:center;margin-bottom:12px}
-.lockcard input:focus{outline:2px solid var(--oro);outline-offset:1px}
-.lockcard .btn{width:100%}
-.lockerr{color:var(--encontra-txt);font-size:12.5px;min-height:16px;margin-top:10px}
 </style>
 </head>
 <body>
 
-<div class="lockscreen" id="lockscreen">
-  <form class="lockcard" id="lockform">
-    <img class="lockescudo" src="" id="lockEscudo" alt="Escudo Deportivo Maldonado">
-    <div class="lockkicker">Deportivo Maldonado · Coordinación Juvenil</div>
-    <h2>Goles <span class="x">×</span> Concepto</h2>
-    <p class="locksub">Ingresá la contraseña para entrar</p>
-    <p class="locksub" style="font-style:italic;margin-top:-4px">Cada situación de juego pide una respuesta · “Las paredes, el techo y los cimientos” · #FormandoEnMaldonado</p>
-    <input type="password" id="lockPass" placeholder="Contraseña" autocomplete="current-password" autofocus>
-    <button type="submit" class="btn primary">Entrar</button>
-    <div class="lockerr" id="lockErr"></div>
-  </form>
-</div>
 
 <header class="top">
   <div class="wrap">
@@ -460,15 +435,6 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
       <div class="f-full">
         <label class="flabel">Situación de juego y conceptos de la jugada</label>
         <div class="tagcloud" id="tagcloud"></div>
-        <div class="newtag-grp">
-          <span class="flabel" style="margin:0">Nuevo concepto en</span>
-          <div class="seg3" id="fNewTagGrupo" role="radiogroup" aria-label="Subcategoría de la etiqueta">
-            <button type="button" data-grp="Individual" class="on" role="radio" aria-checked="true" title="Comportamiento de un jugador">Individual</button>
-            <button type="button" data-grp="Grupal" role="radio" aria-checked="false" title="Concepto de un grupo de jugadores (línea, sector, dupla)">Grupal</button>
-            <button type="button" data-grp="Colectivo" role="radio" aria-checked="false" title="Concepto de todo el equipo">Colectivo</button>
-          </div>
-        </div>
-        <p class="grp-hint" id="grpHint"></p>
         <div class="newtag">
           <input id="fNewTag" placeholder="Nueva etiqueta (ej. Error de posicionamiento)">
           <button type="button" class="btn" id="btnAddTag">Agregar</button>
@@ -519,11 +485,11 @@ const CONCEPT_TAGS = [
   "Contragolpe","Penal","Pérdidas en salida","Pressing alto y transición inmediata",
   "ZF ataque vertical"
 ];
-/* Antes eran "conceptos"; ahora son conceptos individuales (etiquetas). */
+/* Conceptos base (etiquetas). */
 const INDIVIDUAL_BASE = ["Pase filtrado","Duelo ganado","Duelo perdido"];
-const GROUP_TITLES = {Individual:"Conceptos individuales", Grupal:"Conceptos grupales", Colectivo:"Conceptos colectivos"};
+const GROUP_TITLES = {Concepto:"Conceptos"};
 const LABEL_TAGS_BASE = [];
-const TAG_GROUPS = ["Individual","Grupal","Colectivo"];
+const TAG_GROUPS = ["Concepto"];
 const DEFAULT_TAG_GROUPS = {};
 const REMOVED_TAGS = ["Errores defensivos","Error de posicionamiento","No pasar línea de la pelota"];
 
@@ -533,7 +499,7 @@ const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov"
 
 /* ============ estado ============ */
 const state = { goals: [], matches: [], extraTags: [], tagGroups: {}, matchOrder: {}, attach: {} };
-const ui = { newGrp:"Individual", view:"TOT", fTipo:"M", fTag:null, editing:null, formTags:[], formTipo:null, dirty:false, expandedKeys:new Set() };
+const ui = { view:"TOT", fTipo:"M", fTag:null, editing:null, formTags:[], formTipo:null, dirty:false, expandedKeys:new Set() };
 function applyTheme(t){
   document.documentElement.setAttribute("data-theme", t);
   const b = document.getElementById("btnTheme"); if(b) b.textContent = t==="light" ? "☾" : "☀";
@@ -591,9 +557,9 @@ function purgeRemovedTags(){
   return changed;
 }
 function ensureIndividualBase(){
+  state.tagGroups = {};
   INDIVIDUAL_BASE.forEach(t=>{
     if(!state.extraTags.includes(t)) state.extraTags.push(t);
-    if(!state.tagGroups[t]) state.tagGroups[t] = "Individual";
   });
 }
 function backfillMatchFlags(){
@@ -664,7 +630,7 @@ const sync = { rev:0, snap:null, tomb:{}, timer:null, busy:false, again:false, d
 const SYNC_ON = /^https?:$/.test(location.protocol);
 const SYNC_URL = "/api/data";
 const stripU = g => { const c = {...g}; delete c._u; return JSON.stringify(c); };
-function syncHeaders(){ return {"content-type":"application/json","x-pass":LOCK_PASS}; }
+function syncHeaders(){ return {"content-type":"application/json"}; }
 function setSyncStatus(s){
   sync.status = s;
   const el = document.getElementById("syncDot"); if(!el) return;
@@ -773,14 +739,14 @@ async function syncNow(){
 async function uploadAttachment(id, html){
   if(!SYNC_ON) return;
   try{
-    const r = await fetch("/api/file/"+encodeURIComponent(id), {method:"PUT", headers:{"x-pass":LOCK_PASS,"content-type":"text/plain"}, body:html});
+    const r = await fetch("/api/file/"+encodeURIComponent(id), {method:"PUT", headers:{"content-type":"text/plain"}, body:html});
     if(r.status===413) toast("El archivo es muy grande: queda sólo en este dispositivo");
   }catch(e){}
 }
 async function fetchAttachment(id){
   if(!SYNC_ON) return null;
   try{
-    const r = await fetch("/api/file/"+encodeURIComponent(id), {headers:{"x-pass":LOCK_PASS}, cache:"no-store"});
+    const r = await fetch("/api/file/"+encodeURIComponent(id), {cache:"no-store"});
     if(!r.ok) return null;
     const t = await r.text(); try{ await idbPut(id, t); }catch(e){} return t;
   }catch(e){ return null; }
@@ -802,7 +768,7 @@ function labelCatalog(){
   return [...set].sort((a,b)=>a.localeCompare(b,"es"));
 }
 function catalog(){ return conceptCatalog().concat(labelCatalog()); }
-function groupOf(tag){ return state.tagGroups[tag] || DEFAULT_TAG_GROUPS[tag] || "Individual"; }
+function groupOf(tag){ return "Concepto"; }
 function labelsByGroup(){
   const all = labelCatalog();
   const out = {}; TAG_GROUPS.forEach(g=>out[g]=[]);
@@ -1046,7 +1012,7 @@ function groupDashboards(scopeCat, clickable){
   return TAG_GROUPS.map(g=>`
   <section>
     <div class="sec-t"><h2>${GROUP_TITLES[g]}</h2><div class="rule"></div></div>
-    ${by[g].length ? mirrorChart(scopeCat, clickable, by[g]) : `<div class="mempty">Todavía no hay etiquetas en "${GROUP_TITLES[g]}".</div>`}
+    ${by[g].length ? mirrorChart(scopeCat, clickable, by[g]) : `<div class="mempty">Todavía no hay conceptos cargados.</div>`}
   </section>`).join("");
 }
 function renderTotales(){
@@ -1139,21 +1105,11 @@ function render(){
 
 /* ============ modal ============ */
 let lastFocus = null;
-const GRP_HINTS = {
-  Individual: "Individual: comportamiento de un jugador (error, decisión, posicionamiento propio).",
-  Grupal: "Grupal: concepto de un grupo de jugadores (línea, sector, dupla, relación entre compañeros).",
-  Colectivo: "Colectivo: concepto de todo el equipo (estructura, bloque, forma de jugar)."
-};
-function nextGroup(t){ const i = TAG_GROUPS.indexOf(groupOf(t)); return TAG_GROUPS[(i+1)%TAG_GROUPS.length]; }
-function paintNewGrp(){
-  document.querySelectorAll("#fNewTagGrupo button").forEach(b=>{ const on = b.dataset.grp===ui.newGrp; b.classList.toggle("on",on); b.setAttribute("aria-checked",on); });
-  $("#grpHint").textContent = GRP_HINTS[ui.newGrp]||"";
-}
 function tagChipHtml(t, deletable){
   const on = ui.formTags.includes(t);
   return `<span class="chipwrap">
     <button type="button" class="chip ${on?"on":""}" data-ftag="${esc(t)}">${esc(t)}</button>
-    ${deletable?`<button type="button" class="chipmove" data-movetag="${esc(t)}" title="Cambiar de subcategoría (ahora: ${groupOf(t)}). Tocá para pasarla a ${nextGroup(t)}" aria-label="Mover ${esc(t)} a ${nextGroup(t)}">→ ${nextGroup(t)}</button><button type="button" class="chipdel" data-deltag="${esc(t)}" title="Eliminar esta etiqueta de todos los goles" aria-label="Eliminar etiqueta ${esc(t)}">×</button>`:""}
+    ${deletable?`<button type="button" class="chipdel" data-deltag="${esc(t)}" title="Eliminar esta etiqueta de todos los goles" aria-label="Eliminar etiqueta ${esc(t)}">×</button>`:""}
   </span>`;
 }
 function fillTagcloud(){
@@ -1161,13 +1117,12 @@ function fillTagcloud(){
   const byGroup = labelsByGroup();
   const groupsHtml = TAG_GROUPS.map(g=>{
     const tags = byGroup[g];
-    return `<div class="tc-h sub">${GROUP_TITLES[g]}</div>
-      <div class="tc-row">${tags.length ? tags.map(t=>tagChipHtml(t,true)).join("") : '<span class="tc-empty">Sin etiquetas acá todavía.</span>'}</div>`;
+    return `<div class="tc-row">${tags.length ? tags.map(t=>tagChipHtml(t,true)).join("") : '<span class="tc-empty">Sin conceptos acá todavía.</span>'}</div>`;
   }).join("");
   $("#tagcloud").innerHTML = `
     <div class="tc-h">Situaciones de juego</div>
     <div class="tc-row">${concepts}</div>
-    <div class="tc-h">Conceptos individuales · grupales · colectivos</div>
+    <div class="tc-h">Conceptos</div>
     ${groupsHtml}`;
 }
 function deleteTagEverywhere(tag){
@@ -1199,7 +1154,7 @@ function openModal(goal, pre){
   $("#fNewTag").value = "";
   $("#ferr").textContent = "";
   $("#rivales").innerHTML = rivalesConocidos().map(r=>`<option value="${esc(r)}">`).join("");
-  paintTipo(); fillTagcloud(); paintNewGrp();
+  paintTipo(); fillTagcloud();
   $("#overlay").classList.add("open");
   $("#fab").style.display = "none";
   setTimeout(()=>$("#fRival").focus(), 40);
@@ -1520,7 +1475,7 @@ $("#app").addEventListener("click", e => {
       if(!state.attach[k].length) delete state.attach[k];
       idbDel(id).catch(()=>{});
       sync.tomb["f:"+id] = Date.now();
-      if(SYNC_ON) fetch("/api/file/"+encodeURIComponent(id), {method:"DELETE", headers:{"x-pass":LOCK_PASS}}).catch(()=>{});
+      if(SYNC_ON) fetch("/api/file/"+encodeURIComponent(id), {method:"DELETE"}).catch(()=>{});
       ui.expandedKeys.add(k); save(); render(); toast("Archivo quitado");
     }
   }
@@ -1553,12 +1508,6 @@ $("#overlay").addEventListener("click", e=>{ if(e.target===e.currentTarget) clos
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && $("#overlay").classList.contains("open")) closeModal(); });
 
 $("#tagcloud").addEventListener("click", e=>{
-  const mv = e.target.closest("[data-movetag]");
-  if(mv){
-    const t = mv.dataset.movetag, g = nextGroup(t);
-    state.tagGroups[t] = g; save(); fillTagcloud(); render(); toast(`"${t}" ahora es ${g}`);
-    return;
-  }
   const del = e.target.closest("[data-deltag]");
   if(del){
     const t = del.dataset.deltag;
@@ -1574,7 +1523,6 @@ $("#tagcloud").addEventListener("click", e=>{
 $("#btnAddTag").addEventListener("click", addNewTag);
 $("#btnTheme").addEventListener("click", ()=>{ const t = document.documentElement.getAttribute("data-theme")==="light" ? "dark" : "light"; try{ localStorage.setItem("gc-theme",t); }catch(e){} applyTheme(t); });
 applyTheme(document.documentElement.getAttribute("data-theme")||"dark");
-$("#fNewTagGrupo").addEventListener("click", e=>{ const b=e.target.closest("[data-grp]"); if(!b) return; ui.newGrp=b.dataset.grp; paintNewGrp(); });
 $("#fNewTag").addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); addNewTag(); } });
 function addNewTag(){
   const v = $("#fNewTag").value.trim();
@@ -1584,7 +1532,6 @@ function addNewTag(){
   if(!existente){
     state.extraTags.push(tag);
     delete sync.tomb["t:"+tag];
-    state.tagGroups[tag] = ui.newGrp;
   }
   if(!ui.formTags.includes(tag)) ui.formTags.push(tag);
   $("#fNewTag").value = "";
@@ -1611,31 +1558,6 @@ $("#fileImport").addEventListener("change", e=>{
 
 window.addEventListener("beforeunload", e=>{
   if(!hasStore && ui.dirty){ e.preventDefault(); e.returnValue=""; }
-});
-
-/* ============ acceso ============ */
-const LOCK_PASS = "deportivo1928";
-const LOCK_KEY = "goles-conceptos-2026-auth";
-function unlock(){
-  $("#lockscreen").classList.add("hidden");
-}
-try{
-  $("#lockEscudo").src = $(".escudo").src;
-}catch(e){}
-try{
-  if(localStorage.getItem(LOCK_KEY)==="ok") unlock();
-}catch(e){}
-$("#lockform").addEventListener("submit", e=>{
-  e.preventDefault();
-  const v = $("#lockPass").value;
-  if(v===LOCK_PASS){
-    try{ localStorage.setItem(LOCK_KEY,"ok"); }catch(e){}
-    unlock();
-  }else{
-    $("#lockErr").textContent = "Contraseña incorrecta.";
-    $("#lockPass").value = "";
-    $("#lockPass").focus();
-  }
 });
 
 /* ============ arranque ============ */

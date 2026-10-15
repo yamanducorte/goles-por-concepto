@@ -3,7 +3,6 @@
 // GET/PUT/DELETE /api/file/<id> -> archivos HTML adjuntos
 import { getStore } from "@netlify/blobs";
 
-const PASS = process.env.APP_PASS || "deportivo1928";
 const MAX_FILE = 5 * 1024 * 1024;
 
 const json = (obj, status = 200) =>
@@ -13,7 +12,6 @@ const json = (obj, status = 200) =>
   });
 
 export async function handle(req, store) {
-  if (req.headers.get("x-pass") !== PASS) return json({ error: "no autorizado" }, 401);
   const url = new URL(req.url);
   const path = url.pathname.replace(/^\/api\/?/, "").replace(/\/+$/, "");
 
