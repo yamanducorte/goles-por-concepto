@@ -181,6 +181,45 @@ button.mcol-row:hover{background:var(--panel3)}
 .mcol-n{font-family:var(--cond);font-weight:700;font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:var(--tiza2)}
 .mempty{padding:12px;color:var(--tiza3);text-align:center;font-size:12px}
 
+
+/* ---------- barra A favor / En contra (global) ---------- */
+.modebar{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 0 9px}
+.mbtn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:44px;border-radius:12px;border:1.5px solid var(--cal-fuerte);
+  background:var(--panel2,var(--panel));color:var(--tiza2);font-family:var(--cond);font-weight:700;font-size:17px;letter-spacing:.07em;text-transform:uppercase;transition:background .2s,border-color .2s,color .2s}
+.mbtn b{font-size:22px;font-variant-numeric:tabular-nums;opacity:.9}
+.mbtn.mM.on{background:var(--afavor);border-color:var(--afavor);color:#08130c}
+.mbtn.mR.on{background:var(--encontra);border-color:var(--encontra);color:#fff}
+.mbtn:not(.on){opacity:.75}
+.score-side{cursor:pointer;transition:opacity .2s,transform .2s;opacity:.45}
+.score-side.act{opacity:1;transform:scale(1.06)}
+.score-side.act .score-lbl{font-weight:700}
+
+/* ---------- dashboards ---------- */
+.dash{border:1px solid var(--tint-b);border-radius:16px;background:var(--panel);padding:14px 12px 10px}
+.dash-head{display:flex;align-items:center;gap:14px;padding:4px 6px 14px;margin-bottom:6px;border-bottom:1px solid var(--cal)}
+.dh-n{font-family:var(--cond);font-weight:700;font-size:clamp(46px,13vw,64px);line-height:.85;font-variant-numeric:tabular-nums}
+.dash.M .dh-n{color:var(--afavor)} .dash.R .dh-n{color:var(--encontra)}
+.dh-t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.dh-t b{font-family:var(--cond);font-size:clamp(16px,4.5vw,21px);letter-spacing:.06em;text-transform:uppercase;color:var(--tiza)}
+.dh-t span{font-size:13px;color:var(--tiza2)}
+.dh-t em{font-style:normal;font-weight:700;color:var(--tiza)}
+.drows{display:flex;flex-direction:column;gap:2px}
+.drow{display:flex;flex-direction:column;gap:7px;width:100%;text-align:left;padding:11px 10px 12px;border-radius:11px}
+button.drow:hover{background:var(--panel3)}
+.drow-top{display:flex;align-items:baseline;gap:10px}
+.drow-label{flex:1;min-width:0;font-size:clamp(14px,3.8vw,16px);font-weight:600;color:var(--tiza);line-height:1.2}
+.drow-n{font-family:var(--cond);font-weight:700;font-size:clamp(24px,7vw,30px);line-height:1;font-variant-numeric:tabular-nums}
+.drow.M .drow-n{color:var(--afavor)} .drow.R .drow-n{color:var(--encontra)}
+.drow-pct{font-family:var(--cond);font-weight:600;font-size:14px;min-width:38px;text-align:right;color:var(--tiza3);font-variant-numeric:tabular-nums}
+.drow-track{display:block;height:16px;border-radius:999px;background:var(--campo);overflow:hidden}
+.drow-bar{display:block;height:100%;border-radius:999px;opacity:.78;transition:width .4s}
+.drow.M .drow-bar{background:var(--afavor)} .drow.R .drow-bar{background:var(--encontra)}
+.drow.top .drow-bar{opacity:1}
+.drow.top .drow-label{font-weight:700}
+.drow.sg{margin-top:6px;border-top:1px dashed var(--cal-fuerte);border-radius:0;padding-top:14px}
+.drow.sg .drow-label{font-style:italic;font-weight:500;color:var(--tiza2)}
+@media(min-width:720px){.drows{display:grid;grid-template-columns:1fr 1fr;column-gap:18px}.drow.sg{grid-column:1/-1}}
+
 /* ---------- categoría ---------- */
 .cat-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:10px}
 .cat-head h2{font-family:var(--cond);font-weight:700;font-size:24px;letter-spacing:.03em;text-transform:uppercase}
@@ -393,6 +432,7 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
       </div>
     </div>
     <nav class="tabs" id="tabs" aria-label="Categorías"></nav>
+    <div class="modebar" id="modebar" role="group" aria-label="Ver a favor o en contra"></div>
   </div>
 </header>
 
@@ -419,6 +459,10 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
         <label class="flabel" for="fNum">N° de gol</label>
         <input id="fNum" type="number" min="1" max="20" inputmode="numeric" placeholder="1">
       </div>
+      <div class="f-full">
+        <label class="flabel" for="fPartido">Partido (poné el gol en uno existente)</label>
+        <select id="fPartido"></select>
+      </div>
       <div>
         <label class="flabel" for="fRival">Rival</label>
         <input id="fRival" list="rivales" placeholder="Nacional" autocomplete="off">
@@ -433,7 +477,7 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
         <input id="fVideo" type="url" placeholder="https://www.youtube.com/watch?v=…">
       </div>
       <div class="f-full">
-        <label class="flabel">Situación de juego y conceptos de la jugada</label>
+        <label class="flabel">Conceptos y etiquetas de la jugada</label>
         <div class="tagcloud" id="tagcloud"></div>
         <div class="newtag">
           <input id="fNewTag" placeholder="Nueva etiqueta (ej. Error de posicionamiento)">
@@ -483,11 +527,11 @@ const CONCEPT_TAGS = [
   "Centro costado","Centro centro","Centro cruzado","Juego aéreo","Gol de salida",
   "Saque lateral","Pelota quieta","Remate media distancia",
   "Contragolpe","Penal","Pérdidas en salida","Pressing alto y transición inmediata",
-  "ZF ataque vertical"
+  "ZF ataque vertical","Pase filtrado","Duelo ganado","Duelo perdido"
 ];
 /* Conceptos base (etiquetas). */
-const INDIVIDUAL_BASE = ["Pase filtrado","Duelo ganado","Duelo perdido"];
-const GROUP_TITLES = {Concepto:"Conceptos"};
+const INDIVIDUAL_BASE = ["Pase filtrado","Duelo ganado","Duelo perdido"]; /* ahora son Conceptos fijos */
+const GROUP_TITLES = {Concepto:"Desglose"};
 const LABEL_TAGS_BASE = [];
 const TAG_GROUPS = ["Concepto"];
 const DEFAULT_TAG_GROUPS = {};
@@ -558,9 +602,7 @@ function purgeRemovedTags(){
 }
 function ensureIndividualBase(){
   state.tagGroups = {};
-  INDIVIDUAL_BASE.forEach(t=>{
-    if(!state.extraTags.includes(t)) state.extraTags.push(t);
-  });
+  state.extraTags = state.extraTags.filter(t=>!CONCEPT_TAGS.includes(t));
 }
 function backfillMatchFlags(){
   /* Planillas viejas o JSON importados no traen la marca "sin gol": se recupera desde la planilla base. */
@@ -801,58 +843,49 @@ function scoreboard(scopeCat){
       <circle cx="50" cy="30" r=".9" fill="rgba(235,244,233,.14)"/>
     </svg>
     <div class="score-grid">
-      <div class="score-side m"><div class="score-num">${m}</div><div class="score-lbl">Marcados</div></div>
+      <div class="score-side m ${ui.fTipo!=="R"?"act":""}" data-act="ftipo" data-tipo="M"><div class="score-num">${m}</div><div class="score-lbl">Marcados</div></div>
       <div class="score-dif"><span class="dif-chip ${cls}">${sig}</span><div class="dif-lbl">Diferencia</div></div>
-      <div class="score-side r"><div class="score-num">${r}</div><div class="score-lbl">Recibidos</div></div>
+      <div class="score-side r ${ui.fTipo==="R"?"act":""}" data-act="ftipo" data-tipo="R"><div class="score-num">${r}</div><div class="score-lbl">Recibidos</div></div>
     </div>
   </div>`;
 }
 
-let mirrorSeq = 0;
 function sgCount(scopeCat,tipo){ return state.matches.filter(m=>(scopeCat==null||scopeCat==="ALL"||m.cat===scopeCat) && m.tipo===tipo && m.sg).length; }
+/* Dashboard de barras horizontales: muestra solo el lado activo (ui.fTipo), el que se eligió arriba de la página. */
 function mirrorChart(scopeCat, clickable, tagList, withSG){
-  const mC = tagCounts(goalsOf(scopeCat,"M"));
-  const rC = tagCounts(goalsOf(scopeCat,"R"));
-  const base = (tagList||catalog()).map(t=>({t, m:mC.get(t)||0, r:rC.get(t)||0}));
-  const mRows = base.filter(x=>x.m>0);
-  const rRows = base.filter(x=>x.r>0);
-  if(withSG){
-    const sm = sgCount(scopeCat,"M"), sr = sgCount(scopeCat,"R");
-    mRows.push({t:"Partidos sin marcar", m:sm, r:0, sg:true});
-    rRows.push({t:"Partidos sin recibir", m:0, r:sr, sg:true});
+  const tipo = ui.fTipo==="R" ? "R" : "M";
+  const cnt = tagCounts(goalsOf(scopeCat,tipo));
+  const tot = goalsOf(scopeCat,tipo).length;
+  const rows = (tagList||catalog()).map(t=>({t, n:cnt.get(t)||0})).filter(x=>x.n>0);
+  rows.sort((a,b)=> b.n-a.n || a.t.localeCompare(b.t,"es"));
+  const word = tipo==="M" ? "a favor" : "en contra";
+  if(!rows.length && !withSG) return `<div class="mempty">Todavía no hay goles ${word} con estas etiquetas.</div>`;
+  const max = Math.max(1, ...rows.map(x=>x.n));
+  let head = "";
+  if(rows.length){
+    const top = rows[0];
+    head = `<div class="dash-head ${tipo}"><div class="dh-n">${tot}</div><div class="dh-t"><b>goles ${word}</b><span>Más repetido: <em>${esc(top.t)}</em> (${top.n})</span></div></div>`;
   }
-  mRows.sort((a,b)=> b.m-a.m || a.t.localeCompare(b.t,"es"));
-  rRows.sort((a,b)=> b.r-a.r || a.t.localeCompare(b.t,"es"));
-  const totM = goalsOf(scopeCat,"M").length || 1, totR = goalsOf(scopeCat,"R").length || 1;
-  const col = (rows, tipo) => {
-    if(!rows.length) return `<div class="mempty">Todavía no hay goles ${tipo==="M"?"marcados":"recibidos"} con etiquetas acá.</div>`;
-    const max = Math.max(1, ...rows.map(x=> tipo==="M"?x.m:x.r));
-    const tot = tipo==="M"?totM:totR;
-    return `<div class="mcol">${rows.map(x=>{
-      const n = tipo==="M"?x.m:x.r;
-      const w = Math.max(6, n/max*100);
-      const pct = Math.round(n*100/tot);
-      const title = x.sg ? `${n} ${n===1?"partido":"partidos"} — ${x.t}` : `${n} ${n===1?"gol":"goles"} ${tipo==="M"?"marcados":"recibidos"} · ${pct}% — ${x.t}`;
-      const tagAttrs = (clickable && !x.sg) ? `data-act="jump" data-tipo="${tipo}" data-tag="${esc(x.t)}"` : "";
-      const isBtn = clickable && !x.sg;
-      const el = isBtn ? "button type=\"button\"" : "div";
-      const closeEl = isBtn ? "button" : "div";
-      return `<${el} class="mcol-row ${tipo}${x.sg?" sg":""}" ${tagAttrs} title="${esc(title)}">
-        <span class="mcol-label">${esc(x.t)}</span>
-        <span class="mcol-barwrap"><span class="mcol-bar ${tipo}" style="width:${w}%"></span></span>
-        <span class="mcol-n">${n}</span>
-      </${closeEl}>`;
-    }).join("")}</div>`;
-  };
-  const id = "sw"+(mirrorSeq++);
-  return `
-  <div class="mnav">
-    <button type="button" class="mnavbtn mM ${ui.fTipo!=="R"?"on":""}" data-act="ftipo" data-tipo="M">A favor</button>
-    <button type="button" class="mnavbtn mR ${ui.fTipo==="R"?"on":""}" data-act="ftipo" data-tipo="R">En contra</button>
-  </div>
-  <div class="mswipe">
-    <div class="mslide">${ui.fTipo==="R" ? col(rRows,"R") : col(mRows,"M")}</div>
-  </div>`;
+  const rowHtml = rows.map((x,i)=>{
+    const w = Math.max(4, x.n/max*100);
+    const pct = tot ? Math.round(x.n*100/tot) : 0;
+    const title = `${x.n} ${x.n===1?"gol":"goles"} ${word} · ${pct}% — ${x.t}`;
+    const isBtn = !!clickable;
+    const attrs = isBtn ? `type="button" data-act="jump" data-tipo="${tipo}" data-tag="${esc(x.t)}"` : "";
+    const el = isBtn ? "button" : "div";
+    return `<${el} class="drow ${tipo}${i===0?" top":""}" ${attrs} title="${esc(title)}">
+      <span class="drow-top"><span class="drow-label">${esc(x.t)}</span><span class="drow-n">${x.n}</span><span class="drow-pct">${pct}%</span></span>
+      <span class="drow-track"><span class="drow-bar" style="width:${w}%"></span></span>
+    </${el}>`;
+  }).join("");
+  let sgHtml = "";
+  if(withSG){
+    const n = sgCount(scopeCat,tipo);
+    sgHtml = `<div class="drow sg ${tipo}" title="${n} partidos ${tipo==="M"?"sin marcar":"sin recibir"}">
+      <span class="drow-top"><span class="drow-label">${tipo==="M"?"Partidos sin marcar":"Partidos sin recibir"}</span><span class="drow-n">${n}</span><span class="drow-pct">part.</span></span>
+    </div>`;
+  }
+  return `<div class="dash ${tipo}">${head}<div class="drows">${rowHtml}${sgHtml}</div></div>`;
 }
 
 
@@ -995,37 +1028,28 @@ function matchCard(g, forceOpen){
 }
 
 /* ============ vistas ============ */
-function labelGroupAccordion(scopeCat, groupName, tags, clickable, hintSuffix){
+function desgloseSection(scopeCat, clickable){
+  const tags = labelCatalog();
   return `
-  <div class="sec-wrap subacc">
-    <button type="button" class="sec-toggle sub" data-act="toggleSection" aria-expanded="false">
-      <h2>${esc(groupName)}</h2><div class="rule"></div><span class="tag-count">${tags.length}</span><span class="sec-chev">▾</span>
-    </button>
-    <div class="sec-collapse"><div class="sec-collapse-in">
-      ${tags.length ? mirrorChart(scopeCat, clickable, tags) : `<div class="mempty">Todavía no hay etiquetas en "${esc(groupName)}".</div>`}
-      ${tags.length ? `<p class="hint">${clickable?"Tocá una etiqueta para filtrar los partidos.":"Suma de las cinco categorías."}${hintSuffix||""}</p>` : ""}
-    </div></div>
-  </div>`;
-}
-function groupDashboards(scopeCat, clickable){
-  const by = labelsByGroup();
-  return TAG_GROUPS.map(g=>`
   <section>
-    <div class="sec-t"><h2>${GROUP_TITLES[g]}</h2><div class="rule"></div></div>
-    ${by[g].length ? mirrorChart(scopeCat, clickable, by[g]) : `<div class="mempty">Todavía no hay conceptos cargados.</div>`}
-  </section>`).join("");
+    <div class="sec-t"><h2>Desglose</h2><div class="rule"></div></div>
+    ${tags.length ? mirrorChart(scopeCat, clickable, tags) : `<div class="mempty">Todavía no hay etiquetas fuera de los conceptos de juego.</div>`}
+    <p class="hint">Etiquetas propias que no son conceptos de juego.${clickable?" Tocá una para filtrar los partidos.":""}</p>
+  </section>`;
+}
+function conceptosSection(scopeCat, clickable){
+  return `
+  <section>
+    <div class="sec-t"><h2>Conceptos</h2><div class="rule"></div></div>
+    ${mirrorChart(scopeCat, clickable, conceptCatalog(), true)}
+    <p class="hint">${clickable?"Tocá un concepto para filtrar los partidos.":"Suma de las cinco categorías. Elegí una categoría arriba para ver su detalle."}</p>
+  </section>`;
 }
 function renderTotales(){
   return `
-  <section>
-    ${scoreboard("ALL")}
-  </section>
-  <section>
-    <div class="sec-t"><h2>Situaciones de juego</h2><div class="rule"></div></div>
-    ${mirrorChart("ALL", false, conceptCatalog(), true)}
-    <p class="hint">Suma de las cinco categorías. Elegí una categoría en las pestañas de arriba para ver su detalle y tocar una situación.</p>
-  </section>
-  ${groupDashboards("ALL", false)}`;
+  <section>${scoreboard("ALL")}</section>
+  ${conceptosSection("ALL", false)}
+  ${desgloseSection("ALL", false)}`;
 }
 
 function renderCategoria(cat){
@@ -1057,13 +1081,11 @@ function renderCategoria(cat){
       <h2>${catLabel(cat)}</h2>
     </div>
   </section>
+  <section>${scoreboard(cat)}</section>
+  ${conceptosSection(cat, true)}
   <section>
     <div class="sec-t"><h2>Partidos · ${groups.length}</h2><div class="rule"></div></div>
     <div class="filters">
-      <span class="seg">
-        <button class="segM ${ui.fTipo==="M"?"on":""}" data-act="ftipo" data-tipo="M">Marcados</button>
-        <button class="segR ${ui.fTipo==="R"?"on":""}" data-act="ftipo" data-tipo="R">Recibidos</button>
-      </span>
       <div class="chipsbar">
         <button type="button" class="chipsnav" data-chipsnav="-1" aria-label="Ver etiquetas anteriores">‹</button>
         <div class="chips">${tagChips}</div>
@@ -1077,16 +1099,7 @@ function renderCategoria(cat){
     ${groups.noJugados && groups.noJugados.length ? `<p class="hint">${groups.noJugados.length} partido${groups.noJugados.length>1?"s":""} sin goles registrados en ninguna planilla (no disputado${groups.noJugados.length>1?"s":""}): ${groups.noJugados.map(esc).join(", ")}.</p>` : ""}
     ${groups.noGrabados && groups.noGrabados.length ? `<p class="hint">${groups.noGrabados.length} partido${groups.noGrabados.length>1?"s":""} sin grabar (no se registraron los goles): ${groups.noGrabados.map(esc).join(", ")}.</p>` : ""}
   </section>
-  <section>
-    <div class="sec-t"><h2>Situaciones de juego</h2><div class="rule"></div></div>
-    ${mirrorChart(cat, true, conceptCatalog(), true)}
-    <p class="hint">Tocá una situación para filtrar los partidos.</p>
-  </section>
-  <section>
-    <div class="sec-t"><h2>Total de goles</h2><div class="rule"></div></div>
-    ${scoreboard(cat)}
-  </section>
-  ${groupDashboards(cat, true)}`;
+  ${desgloseSection(cat, true)}`;
 }
 
 function renderTabs(){
@@ -1095,9 +1108,17 @@ function renderTabs(){
     `<button class="tab ${ui.view===t.id?"on":""}" data-view="${t.id}">${t.label}</button>`).join("");
 }
 
+function renderModebar(){
+  const cat = ui.view==="TOT" ? "ALL" : ui.view;
+  const m = goalsOf(cat,"M").length, r = goalsOf(cat,"R").length;
+  $("#modebar").innerHTML = `
+    <button type="button" class="mbtn mM ${ui.fTipo!=="R"?"on":""}" data-act="ftipo" data-tipo="M" aria-pressed="${ui.fTipo!=="R"}"><span>A favor</span><b>${m}</b></button>
+    <button type="button" class="mbtn mR ${ui.fTipo==="R"?"on":""}" data-act="ftipo" data-tipo="R" aria-pressed="${ui.fTipo==="R"}"><span>En contra</span><b>${r}</b></button>`;
+}
 function render(){
-  document.body.setAttribute("data-mode", ui.fTipo==="R" ? "R" : "M");
-  renderTabs();
+  if(ui.fTipo!=="R") ui.fTipo = "M";
+  document.body.setAttribute("data-mode", ui.fTipo);
+  renderTabs(); renderModebar();
   $("#app").innerHTML = ui.view==="TOT" ? renderTotales() : renderCategoria(ui.view);
   const n = state.goals.length;
   $("#pieInfo").textContent = `${n} goles y ${state.matches.length} partidos sin goles · base: planilla Goles R y M 2026 (S14–S19)`;
@@ -1117,12 +1138,12 @@ function fillTagcloud(){
   const byGroup = labelsByGroup();
   const groupsHtml = TAG_GROUPS.map(g=>{
     const tags = byGroup[g];
-    return `<div class="tc-row">${tags.length ? tags.map(t=>tagChipHtml(t,true)).join("") : '<span class="tc-empty">Sin conceptos acá todavía.</span>'}</div>`;
+    return `<div class="tc-row">${tags.length ? tags.map(t=>tagChipHtml(t,true)).join("") : '<span class="tc-empty">Sin otras etiquetas todavía.</span>'}</div>`;
   }).join("");
   $("#tagcloud").innerHTML = `
-    <div class="tc-h">Situaciones de juego</div>
-    <div class="tc-row">${concepts}</div>
     <div class="tc-h">Conceptos</div>
+    <div class="tc-row">${concepts}</div>
+    <div class="tc-h">Desglose (otras etiquetas)</div>
     ${groupsHtml}`;
 }
 function deleteTagEverywhere(tag){
@@ -1154,10 +1175,22 @@ function openModal(goal, pre){
   $("#fNewTag").value = "";
   $("#ferr").textContent = "";
   $("#rivales").innerHTML = rivalesConocidos().map(r=>`<option value="${esc(r)}">`).join("");
+  const cur = goal ? buildGroups($("#fCat").value).find(g=>g.goals.some(x=>x.id===goal.id)) : null;
+  ui.formPartido = cur ? cur.key : null;
+  fillPartidos();
+  ui.formPartidoInit = ui.formPartido;
   paintTipo(); fillTagcloud();
   $("#overlay").classList.add("open");
   $("#fab").style.display = "none";
   setTimeout(()=>$("#fRival").focus(), 40);
+}
+function fillPartidos(){
+  const cat = $("#fCat").value;
+  const gs = CATIDS.includes(cat) ? buildGroups(cat) : [];
+  const opts = gs.map(g=>`<option value="${esc(g.key)}">vs ${esc(g.rival||"Rival s/d")} · ${g.fecha?fmtFecha(g.fecha):"s/f"} · ${g.m}–${g.r}</option>`).join("");
+  $("#fPartido").innerHTML = `<option value="">Partido nuevo / escribir rival y fecha</option>` + opts;
+  $("#fPartido").value = (ui.formPartido && gs.some(g=>g.key===ui.formPartido)) ? ui.formPartido : "";
+  if($("#fPartido").value==="") ui.formPartido = null;
 }
 function closeModal(){
   $("#overlay").classList.remove("open");
@@ -1177,7 +1210,9 @@ function saveGoal(){
   const video = $("#fVideo").value.trim();
   if(video && !/^https?:\/\//i.test(video)){ $("#ferr").textContent = "El link tiene que empezar con http:// o https://"; return; }
   const numRaw = $("#fNum").value.trim();
-  const goal = {
+  const old = ui.editing ? state.goals.find(g=>g.id===ui.editing) : null;
+  /* Se parte del gol existente para no perder campos internos (orden, sello de sincronización): así editar no separa el partido. */
+  const goal = Object.assign({}, old||{}, {
     id: ui.editing || uid(),
     cat, tipo: ui.formTipo, rival,
     numero: numRaw ? Math.max(1, parseInt(numRaw,10)||1) : null,
@@ -1185,7 +1220,18 @@ function saveGoal(){
     video: video || null,
     tags: ui.formTags.slice(),
     nota: $("#fNota").value.trim()
-  };
+  });
+  const tg = ui.formPartido ? buildGroups(cat).find(g=>g.key===ui.formPartido) : null;
+  if(tg && !(old && ui.formPartidoInit===ui.formPartido && old.cat===goal.cat)){
+    const sameTipo = tg.goals.concat(tg.matches).find(x=>x.tipo===goal.tipo && x.id!==goal.id && x.orden!=null);
+    const ord = sameTipo ? sameTipo.orden : tg.orden;
+    goal.rival = tg.rival || goal.rival;
+    goal.fecha = tg.fecha || null;
+    if(ord!=null) goal.orden = ord; else delete goal.orden;
+  } else if(!tg && old && (old.cat!==goal.cat || (old.rival||"").toLowerCase()!==rival.toLowerCase() || (old.fecha||null)!==goal.fecha)){
+    /* cambió de partido a mano: se suelta el orden viejo para que no arrastre a otro partido */
+    delete goal.orden;
+  }
   if(ui.editing){
     const i = state.goals.findIndex(g=>g.id===ui.editing);
     if(i>=0) state.goals[i] = goal;
@@ -1318,9 +1364,9 @@ function printCoverPage(escudoSrc){
       <thead><tr><th>Categoría</th><th>Marcados</th><th>Recibidos</th><th>Diferencia</th></tr></thead>
       <tbody>${rowsTable}</tbody>
     </table>
-    <div class="psectitle">Situaciones de juego · a favor vs en contra</div>
+    <div class="psectitle">Conceptos · a favor vs en contra</div>
     ${printRows("ALL", conceptCatalog())}
-    ${TAG_GROUPS.map(g=>`<div class="psectitle">${GROUP_TITLES[g]}</div>${printRows("ALL", labelsByGroup()[g])}`).join("")}
+    <div class="psectitle">Desglose</div>${printRows("ALL", labelCatalog())}
     <div class="pfoot"><span>Informe generado desde la app de goles por concepto</span><span>Deportivo Maldonado 2026</span></div>
   </section>`;
 }
@@ -1339,9 +1385,9 @@ function printCatPage(escudoSrc, cat){
       <div class="side r"><div class="num">${r}</div><div class="lbl">Recibidos</div></div>
     </div>
     <div class="pcompare"><b>${m}</b> de ${tm} goles marcados de la temporada (${pm}%) · <b>${r}</b> de ${tr} recibidos (${pr}%)</div>
-    <div class="psectitle">Situaciones de juego · a favor vs en contra</div>
+    <div class="psectitle">Conceptos · a favor vs en contra</div>
     ${printRows(cat, conceptCatalog())}
-    ${TAG_GROUPS.map(g=>`<div class="psectitle">${GROUP_TITLES[g]}</div>${printRows(cat, labelsByGroup()[g])}`).join("")}
+    <div class="psectitle">Desglose</div>${printRows(cat, labelCatalog())}
     <div class="pfoot"><span>Informe generado desde la app de goles por concepto</span><span>Deportivo Maldonado 2026</span></div>
   </section>`;
 }
@@ -1439,9 +1485,13 @@ $("#app").addEventListener("keydown", e=>{
   const nh = document.querySelector(`.mcard[data-key="${CSS.escape(key)}"] .mc-drag`); if(nh) nh.focus();
 });
 
+$("#modebar").addEventListener("click", e => {
+  const b = e.target.closest("[data-tipo]"); if(!b) return;
+  ui.fTipo = b.dataset.tipo; render();
+});
 $("#tabs").addEventListener("click", e => {
   const b = e.target.closest("[data-view]"); if(!b) return;
-  ui.view = b.dataset.view; ui.fTipo="M"; ui.fTag=null;
+  ui.view = b.dataset.view; ui.fTag=null;
   render(); window.scrollTo({top:0});
 });
 
@@ -1502,6 +1552,14 @@ $("#btnNuevoTop").addEventListener("click", ()=>openModal(null,{cat:ui.view,tipo
 $("#btnCancel").addEventListener("click", closeModal);
 $("#btnSave").addEventListener("click", saveGoal);
 $("#btnDel").addEventListener("click", deleteGoal);
+$("#fCat").addEventListener("change", ()=>{ ui.formPartido=null; fillPartidos(); });
+$("#fPartido").addEventListener("change", ()=>{
+  const key = $("#fPartido").value; ui.formPartido = key || null;
+  if(!key) return;
+  const g = buildGroups($("#fCat").value).find(x=>x.key===key); if(!g) return;
+  $("#fRival").value = g.rival || ""; $("#fFecha").value = g.fecha || "";
+});
+["fRival","fFecha"].forEach(id=>$("#"+id).addEventListener("input", ()=>{ if(ui.formPartido){ ui.formPartido=null; $("#fPartido").value=""; } }));
 $("#segM").addEventListener("click", ()=>{ ui.formTipo="M"; paintTipo(); });
 $("#segR").addEventListener("click", ()=>{ ui.formTipo="R"; paintTipo(); });
 $("#overlay").addEventListener("click", e=>{ if(e.target===e.currentTarget) closeModal(); });
