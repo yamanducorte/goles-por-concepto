@@ -649,13 +649,13 @@ function mergeSeed(){
       sg.tags = (o.tags&&o.tags.length) ? o.tags.slice() : sg.tags; sg.nota = o.nota||sg.nota; if(!sg.fecha && o.fecha) sg.fecha = o.fecha;
       if(oldGroupOf.has(o.id)) oldOf.set(sg.id, oldGroupOf.get(o.id));
     }
-    if(!inherited && sg.numero>0){
+    if(sg.numero>0){
       /* un gol cargado a mano que ahora está en la planilla: se toma su etiqueta/nota y no se duplica */
-      const mg = manual.find(m=>!claimed.has(m.id) && m.cat===sg.cat && m.tipo===sg.tipo && (m.rival||"").toLowerCase()===(sg.rival||"").toLowerCase() && m.numero===sg.numero && (!m.video||!sg.video||m.video===sg.video));
+      const mg = manual.find(m=>!claimed.has(m.id) && m.cat===sg.cat && m.tipo===sg.tipo && (m.rival||"").toLowerCase()===(sg.rival||"").toLowerCase() && m.numero===sg.numero && (!m.video||!sg.video||m.video===sg.video) && (!m.fecha||!sg.fecha||m.fecha===sg.fecha));
       if(mg){
         claimed.add(mg.id);
-        if(mg.tags&&mg.tags.length) sg.tags = mg.tags.slice();
-        sg.nota = mg.nota||sg.nota; if(!sg.fecha && mg.fecha) sg.fecha = mg.fecha;
+        if(!inherited && mg.tags&&mg.tags.length) sg.tags = mg.tags.slice();
+        sg.nota = sg.nota||mg.nota; if(!sg.fecha && mg.fecha) sg.fecha = mg.fecha;
         if(!sg.video && mg.video) sg.video = mg.video;
         if(oldGroupOf.has(mg.id)) oldOf.set(sg.id, oldGroupOf.get(mg.id));
       }
@@ -946,19 +946,27 @@ function mirrorChart(scopeCat, clickable, tagList, withSG){
 
 
 /* ---------- agrupamiento por partido ---------- */
-function groupKeyFor(it){
-  return it.fecha
-    ? `${it.cat}|F|${(it.rival||"").toLowerCase()}|${it.fecha}`
+function groupKeyFor(it, f){
+  f = f===undefined ? it.fecha : f;
+  return f
+    ? `${it.cat}|F|${(it.rival||"").toLowerCase()}|${f}`
     : `${it.cat}|N|${it.tipo}|${(it.rival||"").toLowerCase()}|${it.orden??it.id}`;
 }
 function buildGroups(cat){
   const map = new Map();
+  /* Misma fila de la planilla (categoría + rival + posición) = mismo partido: si una celda trae la fecha, las demás la heredan. */
+  const rowK = it => it.orden!=null ? `${(it.rival||"").toLowerCase()}|${it.orden}` : null;
+  const fill = new Map();
+  const all = state.goals.filter(x=>x.cat===cat).concat(state.matches.filter(x=>x.cat===cat));
+  all.forEach(it=>{ const k = rowK(it); if(k && it.fecha && !fill.has(k)) fill.set(k, it.fecha); });
+  const ef = it => it.fecha || (rowK(it) ? fill.get(rowK(it)) : null) || null;
   const take = it => {
-    const key = groupKeyFor(it);
+    const f = ef(it);
+    const key = groupKeyFor(it, f);
     let g = map.get(key);
-    if(!g){ g = {key, rival:it.rival, fecha:it.fecha, orden:it.orden, goals:[], matches:[]}; map.set(key,g); }
+    if(!g){ g = {key, rival:it.rival, fecha:f, orden:it.orden, goals:[], matches:[]}; map.set(key,g); }
     if(it.tags) g.goals.push(it); else g.matches.push(it);
-    if(it.fecha && !g.fecha) g.fecha = it.fecha;
+    if(f && !g.fecha) g.fecha = f;
     if(it.orden!=null && (g.orden==null || it.orden<g.orden)) g.orden = it.orden;
   };
   state.goals.filter(x=>x.cat===cat).forEach(take);
