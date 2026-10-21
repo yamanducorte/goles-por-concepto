@@ -479,11 +479,9 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
 #introGate .go{position:absolute;left:50%;bottom:max(46px,env(safe-area-inset-bottom));transform:translate(-50%,10px);z-index:3;padding:15px 38px;border-radius:99px;background:#F5F1E3;color:#0C1A0E;border:0;cursor:pointer;font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .6s,transform .6s,background .2s;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 #introGate .go.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
 #introGate .go:hover{background:#3DC24E}
-#introGate .top{position:absolute;top:max(14px,env(safe-area-inset-top));z-index:4;padding:10px 16px;border-radius:99px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(245,241,227,.4);color:#F5F1E3;cursor:pointer;font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase}
+#introGate .top{position:absolute;top:max(14px,env(safe-area-inset-top));z-index:4;padding:4px 10px;border-radius:99px;background:rgba(0,0,0,.4);border:1px solid rgba(245,241,227,.3);color:rgba(245,241,227,.85);cursor:pointer;font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 #introGate .top:hover{background:#F5F1E3;color:#0C1A0E}
-#introGate .skip{right:14px}#introGate .snd{left:14px}
-#introGate .snd.alert{background:#D9B23C;color:#241a03;border-color:#D9B23C;animation:igPulse 1.6s infinite}
-@keyframes igPulse{50%{box-shadow:0 0 0 8px rgba(217,178,60,.25)}}
+#introGate .skip{right:12px}
 #introGate .tap{position:absolute;inset:0;z-index:2;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.35)}
 #introGate .tap.on{display:flex}
 </style>
@@ -493,7 +491,6 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
 <video class="bg" id="igBg" muted playsinline loop aria-hidden="true"></video>
 <video class="v" id="igV" playsinline preload="auto" poster="poster.jpg" src="formando_en_maldonado_liviano.mp4"></video>
 <div class="prog"><i id="igP"></i></div>
-<button class="top snd" id="igSnd" aria-label="Activar sonido">🔇 Activar sonido</button>
 <button class="top skip" id="igSkip">Saltar ›</button>
 <button class="go" id="igGo">Entrar</button>
 </div>
@@ -502,22 +499,18 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
 var d=new Date(),KEY="introVisto_dia",hoy=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),g=document.getElementById("introGate");
 try{ if(localStorage.getItem(KEY)===hoy){ g.remove(); return; } }catch(e){}
 g.hidden=false; document.documentElement.style.overflow="hidden";
-var v=document.getElementById("igV"),bg=document.getElementById("igBg"),go=document.getElementById("igGo"),p=document.getElementById("igP"),snd=document.getElementById("igSnd");
+var v=document.getElementById("igV"),bg=document.getElementById("igBg"),go=document.getElementById("igGo"),p=document.getElementById("igP");
 bg.src=v.src;
 function ready(){ go.classList.add("on"); }
-function sndUI(){ snd.textContent=v.muted?"🔇 Activar sonido":"🔊 Sonido activado"; snd.classList.toggle("alert",v.muted); }
-function unmute(){ v.muted=false; v.volume=1; v.play().catch(function(){}); sndUI(); }
+function unmute(){ v.muted=false; v.volume=1; v.play().catch(function(){}); ["pointerdown","touchstart","keydown","wheel"].forEach(function(t){ document.removeEventListener(t,unmute,true); }); }
 v.addEventListener("timeupdate",function(){ if(v.duration) p.style.width=(v.currentTime/v.duration*100)+"%"; });
 v.addEventListener("ended",ready); v.addEventListener("error",ready);
 setTimeout(function(){ if(v.paused) ready(); },4000);
-/* intenta con sonido; si el navegador lo bloquea, arranca mudo y pide un toque */
+/* sonido activado de entrada; si el navegador lo bloquea, arranca mudo y se activa solo con el primer toque en cualquier lado (sin carteles) */
 v.muted=false;
 var pr=v.play();
-if(pr&&pr.catch) pr.catch(function(){ v.muted=true; v.play().catch(ready); sndUI(); });
-sndUI();
+if(pr&&pr.catch) pr.catch(function(){ v.muted=true; v.play().catch(ready); ["pointerdown","touchstart","keydown","wheel"].forEach(function(t){ document.addEventListener(t,unmute,true); }); });
 bg.play&&bg.play().catch(function(){});
-snd.onclick=function(){ if(v.muted) unmute(); else { v.muted=true; sndUI(); } };
-v.onclick=function(){ if(v.muted) unmute(); };
 function salir(){
   try{ localStorage.setItem(KEY,hoy); }catch(e){}
   g.classList.add("out"); v.pause(); bg.pause(); document.documentElement.style.overflow="";
