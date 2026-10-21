@@ -26,11 +26,37 @@ export async function handle(req, store) {
       if (!body || typeof body.doc !== "object") return json({ error: "falta doc" }, 400);
       const cur = (await store.get("doc", { type: "json" })) || { rev: 0, doc: null };
       if ((body.baseRev || 0) !== cur.rev) return json({ conflict: true, rev: cur.rev, doc: cur.doc }, 409);
+      /* copia de seguridad: el estado previo, una vez por hora de uso (se guardan las últimas 96) */
+      try{
+        if(cur.doc){
+          const d = new Date(); const pad = n=>String(n).padStart(2,"0");
+          const bk = `bak-${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}${pad(d.getUTCHours())}`;
+          if((await store.get(bk)) == null){
+            await store.setJSON(bk, cur.doc);
+            if(store.list){
+              const l = await store.list({ prefix: "bak-" });
+              const keys = (l.blobs||[]).map(b=>b.key).sort();
+              for(const k of keys.slice(0, Math.max(0, keys.length-96))) await store.delete(k);
+            }
+          }
+        }
+      }catch(e){}
       const next = { rev: cur.rev + 1, doc: body.doc, ts: Date.now() };
       await store.setJSON("doc", next);
       return json({ rev: next.rev });
     }
     return json({ error: "método no permitido" }, 405);
+  }
+
+  if (path === "backups" && req.method === "GET") {
+    const l = store.list ? await store.list({ prefix: "bak-" }) : { blobs: [] };
+    return json({ keys: (l.blobs||[]).map(b=>b.key) });
+  }
+  if (path.startsWith("backup/") && req.method === "GET") {
+    const k = path.slice(7);
+    if (!/^bak-\d{10}$/.test(k)) return json({ error: "id inválido" }, 400);
+    const doc = await store.get(k, { type: "json" });
+    return doc ? json(doc) : json({ error: "no existe" }, 404);
   }
 
   if (path.startsWith("file/")) {

@@ -282,6 +282,16 @@ body.admin header.top{box-shadow:inset 0 -3px 0 var(--oro)}
 .rv-chip.on{background:var(--panel3);color:var(--tiza);border-color:var(--tiza2)}
 .rv-chip.R.on{border-color:var(--rvR)}.rv-chip.Y.on{border-color:var(--rvY)}.rv-chip.G.on{border-color:var(--rvG)}
 
+
+.bak-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:16px}
+.bak-box{background:var(--panel);border:1px solid var(--cal-fuerte);border-radius:16px;padding:16px;max-width:460px;width:100%;max-height:85vh;display:flex;flex-direction:column;gap:10px}
+.bak-box h3{font-family:var(--cond);font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.bak-p{font-size:13px;color:var(--tiza2)}
+.bak-list{overflow:auto;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--tiza2)}
+.bak-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--cal-fuerte);border-radius:10px;background:var(--campo);color:var(--tiza);font-weight:600}
+.bak-item span{color:var(--oro);font-family:var(--cond);letter-spacing:.06em;text-transform:uppercase;font-size:12px}
+.bak-foot{display:flex;justify-content:space-between;gap:8px}
+
 /* ---------- categoría ---------- */
 .cat-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:10px}
 .cat-head h2{font-family:var(--cond);font-weight:700;font-size:24px;letter-spacing:.03em;text-transform:uppercase}
@@ -484,6 +494,7 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
             <button data-md="pdf">Exportar informe PDF</button>
             <button data-md="export">Exportar datos (.json)</button>
             <button data-md="import">Importar datos…</button>
+            <button data-md="backups">Recuperar etiquetas de una copia…</button>
             <button data-md="reset">Restaurar planilla original</button>
             <div class="menu-note" id="storeNote"></div>
           </div>
@@ -729,6 +740,49 @@ function mergeSeed(){
   }catch(e){}
   state.matchOrder = {}; /* el orden de la planilla manda */
 }
+/* ---- migración de planilla sin perder etiquetas de otros dispositivos ---- */
+async function fetchRemoteDoc(){
+  if(!SYNC_ON) return null;
+  try{
+    const c = new AbortController(); const t = setTimeout(()=>c.abort(), 6000);
+    const r = await fetch(SYNC_URL, {headers:syncHeaders(), cache:"no-store", signal:c.signal}); clearTimeout(t);
+    if(!r.ok) return null;
+    const j = await r.json(); return j.doc ? j.doc : null;
+  }catch(e){ return null; }
+}
+/* Trae etiquetas/notas/revisiones personalizadas desde otro documento (servidor, copia o archivo) a los goles actuales.
+   Solo pisa un gol cuando el actual quedó con la etiqueta de la planilla y el otro tiene etiquetas propias. */
+function rescueTags(doc){
+  const seedTags = new Map(SEED.goals.map(g=>[g.id, (g.tags||[]).slice().sort().join("|")]));
+  const kk = g => [g.cat,g.tipo,g.video || ((g.rival||"").toLowerCase()+"#"+g.numero)].join("|");
+  const rm = new Map(); (doc.goals||[]).forEach(r=>{ rm.set("i"+r.id, r); rm.set("k"+kk(r), r); });
+  const now = Date.now(); let n = 0;
+  state.goals.forEach(g=>{
+    const r = rm.get("i"+g.id) || rm.get("k"+kk(g)); if(!r) return;
+    const def = seedTags.has(g.id) ? seedTags.get(g.id) : null;
+    const key = a => (a||[]).slice().sort().join("|");
+    const lc = def==null ? true : key(g.tags)!==def;
+    const rc = def==null ? true : key(r.tags)!==def;
+    let ch = false;
+    if(rc && !lc){ g.tags = (r.tags||[]).slice(); ch = true; }
+    else if(rc && lc && key(g.tags)!==key(r.tags)){ g.tags = [...new Set((g.tags||[]).concat(r.tags||[]))]; ch = true; }
+    if(!g.nota && r.nota){ g.nota = r.nota; ch = true; }
+    if(r.rev && !g.rev){ g.rev = JSON.parse(JSON.stringify(r.rev)); ch = true; }
+    if(ch){ g._u = now; n++; }
+  });
+  (doc.extraTags||[]).forEach(t=>{ if(!CONCEPT_TAGS.includes(t) && !state.extraTags.includes(t)) state.extraTags.push(t); });
+  return n;
+}
+async function migrateSeed(){
+  const rem = await fetchRemoteDoc();
+  if(rem && (rem.seedV||0) < SEED_VERSION){
+    /* el servidor sigue con la planilla vieja: primero se une con lo de este dispositivo (nada se pierde) y recién después se migra */
+    const m = mergeDocs(localDoc(), rem);
+    state.goals = m.goals; state.matches = m.matches; state.extraTags = m.extraTags; state.matchOrder = m.matchOrder; state.attach = m.attach; sync.tomb = m.tomb;
+  }
+  mergeSeed();
+  if(rem && (rem.seedV||0) >= SEED_VERSION) rescueTags(rem);
+}
 async function load(){
   try{
     let raw = null;
@@ -746,7 +800,7 @@ async function load(){
         state.extraTags=Array.isArray(d.extraTags)?d.extraTags:[];
         state.tagGroups = (d.v===3 && d.tagGroups && typeof d.tagGroups==="object") ? d.tagGroups : {...DEFAULT_TAG_GROUPS};
         let mig = false;
-        if(d.seedV !== SEED_VERSION){ mergeSeed(); ensureIndividualBase(); mig = true; }
+        if(d.seedV !== SEED_VERSION){ await migrateSeed(); ensureIndividualBase(); mig = true; }
         if(purgeRemovedTags() || mig) save();
         return;
       }
@@ -1790,6 +1844,7 @@ $("#menuDatos").addEventListener("click", e=>{
   if(b.dataset.md==="export") doExport();
   else if(b.dataset.md==="pdf") doExportPDF();
   else if(b.dataset.md==="import") $("#fileImport").click();
+  else if(b.dataset.md==="backups") showBackups();
   else if(b.dataset.md==="reset") doReset();
 });
 document.addEventListener("click", e=>{
@@ -1804,6 +1859,33 @@ $("#fileImport").addEventListener("change", e=>{
 window.addEventListener("beforeunload", e=>{
   if(!hasStore && ui.dirty){ e.preventDefault(); e.returnValue=""; }
 });
+
+
+/* ============ copias de seguridad (servidor, cada hora de uso) ============ */
+function fmtBak(k){ const m = /^bak-(\d{4})(\d{2})(\d{2})(\d{2})$/.exec(k); if(!m) return k;
+  const d = new Date(Date.UTC(+m[1],+m[2]-1,+m[3],+m[4])); return d.toLocaleString("es-UY",{timeZone:"America/Montevideo",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}); }
+async function showBackups(){
+  let wrap = document.getElementById("bakModal"); if(wrap) wrap.remove();
+  wrap = document.createElement("div"); wrap.id = "bakModal"; wrap.className = "bak-overlay";
+  wrap.innerHTML = `<div class="bak-box"><h3>Recuperar etiquetas</h3><p class="bak-p">Elegí una copia anterior: se recuperan las etiquetas, notas y revisiones propias que hoy no estén en los goles. No borra nada de lo actual.</p><div id="bakList" class="bak-list">Buscando copias…</div>
+  <div class="bak-foot"><button type="button" class="btn" id="bakFile">Usar un archivo .json…</button><button type="button" class="btn primary" id="bakClose">Cerrar</button></div></div>`;
+  document.body.appendChild(wrap);
+  $("#bakClose").onclick = ()=>wrap.remove();
+  $("#bakFile").onclick = ()=>{ const i = document.createElement("input"); i.type="file"; i.accept="application/json,.json";
+    i.onchange = async ()=>{ try{ const doc = JSON.parse(await i.files[0].text()); applyRescue(doc,"archivo"); wrap.remove(); }catch(e){ toast("No pude leer ese archivo"); } }; i.click(); };
+  try{
+    const r = await fetch("/api/backups",{cache:"no-store"}); const j = await r.json();
+    const keys = (j.keys||[]).sort().reverse();
+    $("#bakList").innerHTML = keys.length ? keys.map(k=>`<button type="button" class="bak-item" data-bak="${esc(k)}">${esc(fmtBak(k))}<span>Recuperar</span></button>`).join("") : "Todavía no hay copias en el servidor (se crean solas desde ahora, una por hora de uso).";
+    $("#bakList").onclick = async e=>{ const b = e.target.closest("[data-bak]"); if(!b) return;
+      try{ const r2 = await fetch("/api/backup/"+encodeURIComponent(b.dataset.bak),{cache:"no-store"}); const doc = await r2.json(); applyRescue(doc,"copia"); wrap.remove(); }catch(err){ toast("No pude abrir esa copia"); } };
+  }catch(e){ $("#bakList").textContent = "No pude consultar las copias (sin conexión)."; }
+}
+function applyRescue(doc, what){
+  const n = rescueTags(doc);
+  if(n){ save(); render(); }
+  toast(n ? `Recuperé etiquetas en ${n} goles desde la ${what}` : `La ${what} no tenía etiquetas distintas a las actuales`);
+}
 
 /* ============ arranque ============ */
 (async function(){
