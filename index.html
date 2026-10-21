@@ -752,17 +752,40 @@ async function fetchRemoteDoc(){
 }
 /* Trae etiquetas/notas/revisiones personalizadas desde otro documento (servidor, copia o archivo) a los goles actuales.
    Solo pisa un gol cuando el actual quedó con la etiqueta de la planilla y el otro tiene etiquetas propias. */
+function ytId(u){ if(!u) return ""; const m = /(?:[?&]v=|youtu\.be\/|embed\/|shorts\/)([\w-]{6,})/.exec(u); return m ? m[1] : u; }
 function rescueTags(doc){
   const seedTags = new Map(SEED.goals.map(g=>[g.id, (g.tags||[]).slice().sort().join("|")]));
-  const kk = g => [g.cat,g.tipo,g.video || ((g.rival||"").toLowerCase()+"#"+g.numero)].join("|");
-  const rm = new Map(); (doc.goals||[]).forEach(r=>{ rm.set("i"+r.id, r); rm.set("k"+kk(r), r); });
+  const key = a => (a||[]).slice().sort().join("|");
+  const olds = (doc.goals||[]);
+  const matchOf = new Map();            /* id gol actual -> gol del otro documento */
+  const usedOld = new Set(), done = new Set();
+  const link = (g,r)=>{ matchOf.set(g.id,r); usedOld.add(r.id); done.add(g.id); };
+  /* pasada 0: mismo id */
+  const byId = new Map(olds.map(r=>[r.id,r]));
+  state.goals.forEach(g=>{ const r = byId.get(g.id); if(r && !usedOld.has(r.id)) link(g,r); });
+  /* pasada 1: mismo video y mismo número */
+  const k1 = g => g.video ? [g.cat,g.tipo,ytId(g.video),g.numero].join("|") : null;
+  const m1 = new Map(); olds.forEach(r=>{ if(!usedOld.has(r.id) && k1(r)) m1.set(k1(r), r); });
+  state.goals.forEach(g=>{ if(done.has(g.id)) return; const r = k1(g) && m1.get(k1(g)); if(r && !usedOld.has(r.id)) link(g,r); });
+  /* pasada 2: mismo video (si en cada lado es único y el número cambió) */
+  const k2 = g => g.video ? [g.cat,g.tipo,ytId(g.video)].join("|") : null;
+  const cOld = new Map(), cNew = new Map();
+  olds.forEach(r=>{ if(!usedOld.has(r.id) && k2(r)) cOld.set(k2(r),(cOld.get(k2(r))||0)+1); });
+  state.goals.forEach(g=>{ if(!done.has(g.id) && k2(g)) cNew.set(k2(g),(cNew.get(k2(g))||0)+1); });
+  const m2 = new Map(); olds.forEach(r=>{ if(!usedOld.has(r.id) && k2(r) && cOld.get(k2(r))===1) m2.set(k2(r), r); });
+  state.goals.forEach(g=>{ if(done.has(g.id)) return; const k = k2(g); const r = k && cNew.get(k)===1 && m2.get(k); if(r && !usedOld.has(r.id)) link(g,r); });
+  /* pasada 3: gol que cambió de link en la planilla: mismo rival y número, solo entre los que quedaron sin pareja de ambos lados */
+  const left = olds.filter(r=>!usedOld.has(r.id));
+  const k3 = g => [g.cat,g.tipo,(g.rival||"").toLowerCase(),g.numero].join("|");
+  const m3 = new Map(); left.forEach(r=>{ const k = k3(r); m3.set(k, m3.has(k) ? null : r); });
+  state.goals.forEach(g=>{ if(done.has(g.id)) return; const r = m3.get(k3(g)); if(r && !usedOld.has(r.id)) link(g,r); });
+
   const now = Date.now(); let n = 0;
   state.goals.forEach(g=>{
-    const r = rm.get("i"+g.id) || rm.get("k"+kk(g)); if(!r) return;
+    const r = matchOf.get(g.id); if(!r) return;
     const def = seedTags.has(g.id) ? seedTags.get(g.id) : null;
-    const key = a => (a||[]).slice().sort().join("|");
     const lc = def==null ? true : key(g.tags)!==def;
-    const rc = def==null ? true : key(r.tags)!==def;
+    const rc = (r.tags||[]).length>0 && ((r.tags||[]).length>1 || (r.tags||[]).some(t=>!CONCEPT_TAGS.includes(t)) || (def!=null && key(r.tags)!==def));
     let ch = false;
     if(rc && !lc){ g.tags = (r.tags||[]).slice(); ch = true; }
     else if(rc && lc && key(g.tags)!==key(r.tags)){ g.tags = [...new Set((g.tags||[]).concat(r.tags||[]))]; ch = true; }
