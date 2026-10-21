@@ -469,8 +469,48 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
 /* ---------- pantalla de acceso ---------- */
   color:var(--tiza);font-size:15px;text-align:center;margin-bottom:12px}
 </style>
+<style id="intro-css">
+#introGate{position:fixed;inset:0;z-index:10000;background:#050b06;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .7s}
+#introGate.out{opacity:0;pointer-events:none}
+#introGate .bg{position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;filter:blur(38px) brightness(.45) saturate(1.2);transform:scale(1.1)}
+#introGate .v{position:relative;height:100%;max-width:100%;aspect-ratio:9/16;object-fit:contain;box-shadow:0 0 80px rgba(0,0,0,.7)}
+#introGate .prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.18);z-index:2}
+#introGate .prog i{display:block;height:100%;width:0;background:#3DC24E}
+#introGate .go{position:absolute;left:50%;bottom:max(46px,env(safe-area-inset-bottom));transform:translate(-50%,10px);z-index:3;padding:15px 38px;border-radius:99px;background:#F5F1E3;color:#0C1A0E;border:0;cursor:pointer;font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .6s,transform .6s,background .2s;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#introGate .go.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+#introGate .go:hover{background:#3DC24E}
+#introGate .tap{position:absolute;inset:0;z-index:2;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.35)}
+#introGate .tap.on{display:flex}
+</style>
 </head>
 <body>
+<div id="introGate" role="dialog" aria-label="Presentación" hidden>
+<video class="bg" id="igBg" muted playsinline loop aria-hidden="true"></video>
+<video class="v" id="igV" muted playsinline preload="auto" poster="poster.jpg" src="formando_en_maldonado_liviano.mp4"></video>
+<div class="prog"><i id="igP"></i></div>
+<button class="go" id="igGo">Entrar</button>
+</div>
+<script>
+(function(){
+var KEY="introVisto_v1",g=document.getElementById("introGate");
+try{ if(localStorage.getItem(KEY)){ g.remove(); return; } }catch(e){}
+g.hidden=false; document.documentElement.style.overflow="hidden";
+var v=document.getElementById("igV"),bg=document.getElementById("igBg"),go=document.getElementById("igGo"),p=document.getElementById("igP");
+bg.src=v.src;
+function ready(){ go.classList.add("on"); }
+v.addEventListener("timeupdate",function(){ if(v.duration) p.style.width=(v.currentTime/v.duration*100)+"%"; });
+v.addEventListener("ended",ready);
+v.addEventListener("error",ready);
+setTimeout(function(){ if(v.paused) ready(); },4000); /* si el video no arranca, no dejar a nadie trabado */
+var pr=v.play(); bg.play&&bg.play().catch(function(){});
+if(pr&&pr.catch) pr.catch(ready);
+go.onclick=function(){
+  try{ localStorage.setItem(KEY,"1"); }catch(e){}
+  g.classList.add("out"); v.pause(); bg.pause(); document.documentElement.style.overflow="";
+  setTimeout(function(){ g.remove(); },800);
+};
+})();
+</script>
 
 
 <header class="top">
