@@ -243,6 +243,45 @@ nav.tabs{padding:3px 0 5px}
 .gl-note.ng span{color:#D9B23C}
 html[data-theme="light"] .mc-flag:not(.soft),html[data-theme="light"] .gl-note.ng span{color:#8a6a00;border-color:#b58a00}
 
+
+/* ---------- admin / revisión de etiquetas ---------- */
+.adminbtn{font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--cal-fuerte);color:var(--tiza2);background:transparent}
+.adminbtn[aria-pressed="true"]{background:var(--oro);border-color:var(--oro);color:#241a03}
+body.admin header.top{box-shadow:inset 0 -3px 0 var(--oro)}
+:root{--rvG:#3DC24E;--rvY:#E6B92E;--rvR:#E8402F}
+.rv-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:baseline}
+.rv-dot.G{background:var(--rvG)}.rv-dot.Y{background:var(--rvY)}.rv-dot.R{background:var(--rvR)}
+.tagchip.rv-G{border-color:var(--rvG)}.tagchip.rv-Y{border-color:var(--rvY)}.tagchip.rv-R{border-color:var(--rvR)}
+.iconb.rvbtn.on{background:var(--oro);border-color:var(--oro);color:#241a03}
+.rv-cnts{display:inline-flex;gap:3px;margin-left:6px;flex-shrink:0}
+.rv-cnt{min-width:18px;height:18px;padding:0 5px;border-radius:9px;font-family:var(--cond);font-weight:700;font-size:11px;display:inline-flex;align-items:center;justify-content:center;color:#0b0f0b}
+.rv-cnt.G{background:var(--rvG)}.rv-cnt.Y{background:var(--rvY)}.rv-cnt.R{background:var(--rvR);color:#fff}
+.rv-notes{display:flex;flex-direction:column;gap:6px;padding:2px 12px 10px}
+.rv-note{display:flex;flex-direction:column;gap:2px;padding:7px 10px;border-radius:9px;border-left:4px solid var(--cal-fuerte);background:var(--campo);font-size:12.5px;line-height:1.35}
+.rv-note b{font-family:var(--cond);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--tiza3)}
+.rv-note span{color:var(--tiza)}
+.rv-note.G{border-left-color:var(--rvG)}.rv-note.Y{border-left-color:var(--rvY)}.rv-note.R{border-left-color:var(--rvR)}
+.rv-panel{margin:2px 12px 12px;padding:10px;border:1px solid var(--cal-fuerte);border-radius:12px;background:var(--panel2);display:flex;flex-direction:column;gap:10px}
+.rv-item{display:flex;flex-direction:column;gap:6px;padding-bottom:10px;border-bottom:1px dashed var(--cal)}
+.rv-item:last-of-type{border-bottom:0;padding-bottom:0}
+.rv-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rv-name{font-weight:700;font-size:13.5px}
+.rv-btns{display:flex;gap:6px}
+.rv-b{width:34px;height:34px;border-radius:50%;border:2px solid var(--cal-fuerte);background:var(--campo);color:var(--tiza3);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.rv-b.G:hover,.rv-b.G.on{background:var(--rvG);border-color:var(--rvG);color:#08130c}
+.rv-b.Y:hover,.rv-b.Y.on{background:var(--rvY);border-color:var(--rvY);color:#241a03}
+.rv-b.R:hover,.rv-b.R.on{background:var(--rvR);border-color:var(--rvR);color:#fff}
+.rv-b.clr{border-style:dashed;font-size:14px}
+.rv-text{font-size:13px;min-height:44px;resize:vertical}
+.rv-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.rv-hint,.rv-empty{font-size:11.5px;color:var(--tiza3)}
+.rv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px;padding:7px 9px;border:1px dashed var(--oro);border-radius:12px}
+.rv-bar-t{font-family:var(--cond);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--oro);margin-right:2px}
+.rv-chip{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:999px;border:1px solid var(--cal-fuerte);background:var(--campo);color:var(--tiza2);font-size:12.5px}
+.rv-chip b{font-family:var(--cond);margin-left:3px}
+.rv-chip.on{background:var(--panel3);color:var(--tiza);border-color:var(--tiza2)}
+.rv-chip.R.on{border-color:var(--rvR)}.rv-chip.Y.on{border-color:var(--rvY)}.rv-chip.G.on{border-color:var(--rvG)}
+
 /* ---------- categoría ---------- */
 .cat-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:10px}
 .cat-head h2{font-family:var(--cond);font-weight:700;font-size:24px;letter-spacing:.03em;text-transform:uppercase}
@@ -450,6 +489,7 @@ footer.pie{border-top:1px solid var(--cal);padding:14px 0 22px;color:var(--tiza3
           </div>
         </details>
         <span id="syncDot" title="Sincronización" style="width:9px;height:9px;border-radius:50%;background:#8a8f86;flex-shrink:0;display:none"></span>
+        <button class="adminbtn" id="btnAdmin" type="button" aria-pressed="false" title="Modo admin: revisión de etiquetas">Admin</button>
         <button class="themebtn" id="btnTheme" type="button" aria-label="Cambiar entre modo claro y oscuro" title="Modo claro / oscuro">☀</button>
         <button class="btn primary" id="btnNuevoTop">+ Cargar gol</button>
       </div>
@@ -566,7 +606,7 @@ const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","set","oct","nov"
 
 /* ============ estado ============ */
 const state = { goals: [], matches: [], extraTags: [], tagGroups: {}, matchOrder: {}, attach: {} };
-const ui = { view:"TOT", fTipo:"M", fTag:null, editing:null, formTags:[], formTipo:null, dirty:false, expandedKeys:new Set() };
+const ui = { admin:false, revOpen:null, fRev:null, view:"TOT", fTipo:"M", fTag:null, editing:null, formTags:[], formTipo:null, dirty:false, expandedKeys:new Set() };
 function applyTheme(t){
   document.documentElement.setAttribute("data-theme", t);
   const b = document.getElementById("btnTheme"); if(b) b.textContent = t==="light" ? "☾" : "☀";
@@ -655,6 +695,7 @@ function mergeSeed(){
     if(o){
       used.add(o.id); inherited = true;
       sg.tags = (o.tags&&o.tags.length) ? o.tags.slice() : sg.tags; sg.nota = o.nota||sg.nota; if(!sg.fecha && o.fecha) sg.fecha = o.fecha;
+      if(o.rev) sg.rev = JSON.parse(JSON.stringify(o.rev));
       if(oldGroupOf.has(o.id)) oldOf.set(sg.id, oldGroupOf.get(o.id));
     }
     if(sg.numero>0){
@@ -663,7 +704,7 @@ function mergeSeed(){
       if(mg){
         claimed.add(mg.id);
         if(!inherited && mg.tags&&mg.tags.length) sg.tags = mg.tags.slice();
-        sg.nota = sg.nota||mg.nota; if(!sg.fecha && mg.fecha) sg.fecha = mg.fecha;
+        sg.nota = sg.nota||mg.nota; if(mg.rev && !sg.rev) sg.rev = JSON.parse(JSON.stringify(mg.rev)); if(!sg.fecha && mg.fecha) sg.fecha = mg.fecha;
         if(!sg.video && mg.video) sg.video = mg.video;
         if(oldGroupOf.has(mg.id)) oldOf.set(sg.id, oldGroupOf.get(mg.id));
       }
@@ -1043,20 +1084,43 @@ function buildGroups(cat){
   return groups;
 }
 
+const RV = {G:{n:"Correcta",i:"✓"}, Y:{n:"A mejorar",i:"!"}, R:{n:"Incorrecta",i:"✕"}};
+function revOf(g,t){ return (g.rev && g.rev[t]) || null; }
+function sortedTags(g){ const c = CONCEPT_TAGS; return (g.tags||[]).slice().sort((a,b)=> (c.includes(a)?0:1)-(c.includes(b)?0:1)); }
+function reviewPanel(g){
+  const tags = sortedTags(g);
+  if(!tags.length) return `<div class="rv-panel"><div class="rv-empty">Este gol no tiene etiquetas para revisar.</div><div class="rv-foot"><button type="button" class="btn" data-act="revclose">Cerrar</button></div></div>`;
+  return `<div class="rv-panel">${tags.map(t=>{
+    const r = revOf(g,t)||{};
+    return `<div class="rv-item">
+      <div class="rv-top"><span class="rv-name">${esc(t)}</span>
+        <span class="rv-btns">${["G","Y","R"].map(c=>`<button type="button" class="rv-b ${c} ${r.c===c?"on":""}" data-act="revset" data-id="${esc(g.id)}" data-tag="${esc(t)}" data-c="${c}" title="${RV[c].n}" aria-label="${RV[c].n}" aria-pressed="${r.c===c}">${RV[c].i}</button>`).join("")}
+        ${r.c?`<button type="button" class="rv-b clr" data-act="revset" data-id="${esc(g.id)}" data-tag="${esc(t)}" data-c="" title="Quitar revisión" aria-label="Quitar revisión">↺</button>`:""}</span>
+      </div>
+      <textarea class="rv-text" rows="2" data-revtext data-id="${esc(g.id)}" data-tag="${esc(t)}" placeholder="Corrección para el entrenador (ej.: es Centro cruzado, no Centro costado)">${esc(r.n||"")}</textarea>
+    </div>`;}).join("")}
+    <div class="rv-foot"><span class="rv-hint">Solo lo ves vos en modo admin</span><button type="button" class="btn primary" data-act="revclose">Listo</button></div>
+  </div>`;
+}
 function goalLine(g, hl){
+  const adm = ui.admin;
   const tags = (g.tags&&g.tags.length)
-    ? g.tags.map(t=>`<button class="tagchip ${ui.fTag===t?"on":""}" data-act="ftag" data-tag="${esc(t)}" title="Ver goles con esta etiqueta">${esc(t)}</button>`).join("")
+    ? sortedTags(g).map(t=>{ const r = adm ? revOf(g,t) : null;
+        return `<button class="tagchip ${ui.fTag===t?"on":""} ${r&&r.c?"rv-"+r.c:""}" data-act="ftag" data-tag="${esc(t)}" title="Ver goles con esta etiqueta${r&&r.c?" · "+RV[r.c].n:""}">${r&&r.c?`<i class="rv-dot ${r.c}"></i>`:""}${esc(t)}</button>`; }).join("")
     : `<span class="tagchip none">sin etiquetas</span>`;
+  const notes = adm ? sortedTags(g).map(t=>{ const r = revOf(g,t); return (r&&r.n) ? `<div class="rv-note ${r.c||"N"}"><b>${esc(t)}</b><span>${esc(r.n)}</span></div>` : ""; }).join("") : "";
+  const isOpen = adm && ui.revOpen===g.id;
   return `
   <div class="gl-row ${hl?"hl":""}">
     <span class="gl-badge ${g.tipo}">${g.tipo}</span>
     <span class="gl-num">${g.numero?esc(g.numero+"°"):"—"}</span>
     <div class="gl-tags">${tags}</div>
     <div class="gl-acts">
+      ${adm?`<button class="iconb rvbtn ${isOpen?"on":""}" data-act="revopen" data-id="${esc(g.id)}" title="Revisar etiquetas (admin)" aria-label="Revisar etiquetas">✔</button>`:""}
       ${g.video?`<a class="iconb play" href="${esc(g.video)}" target="_blank" rel="noopener" title="Ver video" aria-label="Ver video">▶</a>`:""}
       <button class="iconb" data-act="edit" data-id="${esc(g.id)}" title="Editar gol" aria-label="Editar gol">✎</button>
     </div>
-  </div>${g.nota?`<div class="gl-note" style="border-bottom:1px solid var(--cal)"><span>${esc(g.nota)}</span></div>`:""}`;
+  </div>${notes?`<div class="rv-notes">${notes}</div>`:""}${isOpen?reviewPanel(g):""}${g.nota?`<div class="gl-note" style="border-bottom:1px solid var(--cal)"><span>${esc(g.nota)}</span></div>`:""}`;
 }
 
 function matchCard(g, forceOpen){
@@ -1079,6 +1143,13 @@ function matchCard(g, forceOpen){
   const scoreHtml = (g.goals.length>0)
     ? `<span class="mc-score"><span class="sm">${g.m}</span><span class="sep">–</span><span class="sr">${g.r}</span></span>`
     : `<span class="mc-score">${sc(g.hasM,g.m,mNG,"sm")}<span class="sep">–</span>${sc(g.hasR,g.r,rNG,"sr")}</span>`;
+  let rvDots = "";
+  if(ui.admin){
+    const cnt = {G:0,Y:0,R:0};
+    g.goals.forEach(x=>Object.values(x.rev||{}).forEach(r=>{ if(r&&r.c) cnt[r.c]++; }));
+    rvDots = ["R","Y","G"].filter(c=>cnt[c]).map(c=>`<span class="rv-cnt ${c}" title="${RV[c].n}">${cnt[c]}</span>`).join("");
+    if(rvDots) rvDots = `<span class="rv-cnts">${rvDots}</span>`;
+  }
   const flag = (mNG||rNG) ? `<span class="mc-flag" title="No grabado"><span class="fl-l">no grabado</span><span class="fl-s">no grab.</span></span>` : (g.goals.length===0 ? `<span class="mc-flag soft">sin goles</span>` : "");
 
   return `
@@ -1088,7 +1159,7 @@ function matchCard(g, forceOpen){
       <button class="mc-head" data-act="togglecard" data-key="${esc(g.key)}">
         <span class="mc-rival"><span class="vs">vs</span> ${esc(g.rival||"Rival s/d")}${g.fase?` <small class="mc-fase">${esc(g.fase)}</small>`:""}</span>${flag}
         ${files.length?`<span class="mc-attn" title="${files.length} archivo${files.length>1?"s":""} adjunto${files.length>1?"s":""}">📎${files.length>1?files.length:""}</span>`:""}
-        <span class="mc-fecha">${g.fecha?fmtFecha(g.fecha):"s/f"}</span>
+        ${rvDots}<span class="mc-fecha">${g.fecha?fmtFecha(g.fecha):"s/f"}</span>
         ${scoreHtml}
         <span class="mc-chev">▾</span>
       </button>
@@ -1138,6 +1209,11 @@ function renderCategoria(cat){
   if(ui.fTipo==="M") groups = groups.filter(g=>g.hasM);
   else if(ui.fTipo==="R") groups = groups.filter(g=>g.hasR);
 
+  if(ui.admin && ui.fRev){
+    const inS = it => it.tipo===ui.fTipo;
+    groups = groups.filter(g => g.goals.some(x=>inS(x) && Object.values(x.rev||{}).some(r=>r&&r.c===ui.fRev)));
+    groups.forEach(g=>forceOpenKeys.add(g.key));
+  }
   if(ui.fTag){
     const inScope = it => ui.fTipo==="ALL" || it.tipo===ui.fTipo;
     const tagMatch = it => ui.fTag==="__none__" ? !(it.tags&&it.tags.length) : (it.tags||[]).includes(ui.fTag);
@@ -1155,6 +1231,9 @@ function renderCategoria(cat){
     .map(x=>`<button class="chip ${ui.fTag===x.t?"on":""}" data-act="ftag" data-tag="${esc(x.t)}">${esc(x.t)}<span class="n">${x.n}</span></button>`)
     .join("") + (sinTag?`<button class="chip ${ui.fTag==="__none__"?"on":""}" data-act="ftag" data-tag="__none__">Sin etiquetas<span class="n">${sinTag}</span></button>`:"");
 
+  const rvCnt = {G:0,Y:0,R:0};
+  if(ui.admin) goalsOf(cat, ui.fTipo).forEach(x=>Object.values(x.rev||{}).forEach(r=>{ if(r&&r.c) rvCnt[r.c]++; }));
+  const rvBar = ui.admin ? `<div class="rv-bar"><span class="rv-bar-t">Revisión</span>${["R","Y","G"].map(c=>`<button type="button" class="rv-chip ${c} ${ui.fRev===c?"on":""}" data-act="frev" data-c="${c}"><i class="rv-dot ${c}"></i>${RV[c].n}<b>${rvCnt[c]}</b></button>`).join("")}</div>` : "";
   return `
   <section>
     <div class="cat-head">
@@ -1165,6 +1244,7 @@ function renderCategoria(cat){
   ${conceptosSection(cat, true)}
   <section>
     <div class="sec-t"><h2>Partidos · ${groups.length}</h2><div class="rule"></div></div>
+    ${rvBar}
     <div class="filters">
       <div class="chipsbar">
         <button type="button" class="chipsnav" data-chipsnav="-1" aria-label="Ver etiquetas anteriores">‹</button>
@@ -1225,7 +1305,7 @@ function fillTagcloud(){
     ${groupsHtml}`;
 }
 function deleteTagEverywhere(tag){
-  state.goals.forEach(g=>{ if(g.tags && g.tags.length) g.tags = g.tags.filter(x=>x!==tag); });
+  state.goals.forEach(g=>{ if(g.tags && g.tags.length) g.tags = g.tags.filter(x=>x!==tag); if(g.rev && g.rev[tag]){ delete g.rev[tag]; if(!Object.keys(g.rev).length) delete g.rev; } });
   state.extraTags = state.extraTags.filter(x=>x!==tag);
   delete state.tagGroups[tag];
   sync.tomb["t:"+tag] = Date.now();
@@ -1299,6 +1379,7 @@ function saveGoal(){
     tags: ui.formTags.slice(),
     nota: $("#fNota").value.trim()
   });
+  if(goal.rev){ Object.keys(goal.rev).forEach(t=>{ if(!goal.tags.includes(t)) delete goal.rev[t]; }); if(!Object.keys(goal.rev).length) delete goal.rev; }
   const tg = ui.formPartido ? buildGroups(cat).find(g=>g.key===ui.formPartido) : null;
   if(tg && !(old && ui.formPartidoInit===ui.formPartido && old.cat===goal.cat)){
     const sameTipo = tg.goals.concat(tg.matches).find(x=>x.tipo===goal.tipo && x.id!==goal.id && x.orden!=null);
@@ -1614,6 +1695,14 @@ $("#app").addEventListener("click", e => {
     b.setAttribute("aria-expanded", open ? "true" : "false");
   }
   else if(act==="clearf"){ ui.fTipo="M"; ui.fTag=null; render(); }
+  else if(act==="revopen"){ ui.revOpen = (ui.revOpen===b.dataset.id) ? null : b.dataset.id; render(); }
+  else if(act==="revclose"){ ui.revOpen = null; render(); }
+  else if(act==="revset"){
+    const card = b.closest(".rv-panel"); const ta = card && card.querySelectorAll("[data-revtext]");
+    if(ta) ta.forEach(t=>revWrite(t.dataset.id, t.dataset.tag, {n:t.value.trim()}));
+    revWrite(b.dataset.id, b.dataset.tag, {c:b.dataset.c}); render();
+  }
+  else if(act==="frev"){ ui.fRev = (ui.fRev===b.dataset.c) ? null : b.dataset.c; render(); }
   else if(act==="edit"){ const g=state.goals.find(x=>x.id===b.dataset.id); if(g) openModal(g,null); }
   else if(act==="delmatch"){
     const p = state.matches.find(x=>x.id===b.dataset.id);
@@ -1657,6 +1746,26 @@ $("#tagcloud").addEventListener("click", e=>{
   fillTagcloud();
 });
 $("#btnAddTag").addEventListener("click", addNewTag);
+function setAdmin(on){
+  ui.admin = !!on; if(!on){ ui.revOpen=null; ui.fRev=null; }
+  document.body.classList.toggle("admin", ui.admin);
+  const b = $("#btnAdmin"); if(b) b.setAttribute("aria-pressed", String(ui.admin));
+  try{ localStorage.setItem("gc-admin", ui.admin?"1":"0"); }catch(e){}
+}
+$("#btnAdmin").addEventListener("click", ()=>{ setAdmin(!ui.admin); render(); toast(ui.admin?"Modo admin activado":"Modo admin desactivado"); });
+function revWrite(id, tag, patch){
+  const g = state.goals.find(x=>x.id===id); if(!g || !(g.tags||[]).includes(tag)) return;
+  const rev = Object.assign({}, g.rev||{});
+  const cur = Object.assign({}, rev[tag]||{}, patch);
+  if(!cur.c) delete cur.c;
+  if(!cur.c && !(cur.n||"").trim()) delete rev[tag]; else rev[tag] = cur;
+  if(Object.keys(rev).length) g.rev = rev; else delete g.rev;
+  save();
+}
+$("#app").addEventListener("change", e=>{
+  const t = e.target.closest("[data-revtext]"); if(!t || !ui.admin) return;
+  revWrite(t.dataset.id, t.dataset.tag, {n:t.value.trim()});
+});
 $("#btnTheme").addEventListener("click", ()=>{ const t = document.documentElement.getAttribute("data-theme")==="light" ? "dark" : "light"; try{ localStorage.setItem("gc-theme",t); }catch(e){} applyTheme(t); });
 applyTheme(document.documentElement.getAttribute("data-theme")||"dark");
 $("#fNewTag").addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); addNewTag(); } });
@@ -1703,6 +1812,7 @@ window.addEventListener("beforeunload", e=>{
   $("#storeNote").textContent = hasStore
     ? (SYNC_ON ? "Los cambios se guardan y se comparten con los demás dispositivos (punto verde = sincronizado)." : "Los cambios se guardan automáticamente en esta vista.")
     : "Sin guardado automático acá: exportá para respaldar.";
+  try{ if(localStorage.getItem("gc-admin")==="1") setAdmin(true); }catch(e){}
   render();
 })();
 </script>
